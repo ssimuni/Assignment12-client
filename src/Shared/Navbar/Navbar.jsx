@@ -1,20 +1,25 @@
 import React from 'react'
+import { Link, NavLink, Navigate, useLocation } from 'react-router-dom'
 
 const Navbar = () => {
 
 
+    const location = useLocation();
+    console.log(location.pathname);
+
+    const isActive = (path) => {
+        return location.pathname === path ? 'text-[#E3963E] font-semibold' : 'text-[#E3963E] font-semibold';
+
+    };
+
     const navOptions = <>
-        <li><a>Item 1</a></li>
-        <li>
-            <details>
-                <summary>Parent</summary>
-                <ul className="p-2">
-                    <li><a>Submenu 1</a></li>
-                    <li><a>Submenu 2</a></li>
-                </ul>
-            </details>
-        </li>
-        <li><a>Item 3</a></li>
+        <li className='text-[#E3963E] ml-5 pr-6 font-semibold text-base'><NavLink to="/" className={isActive('/')}>Home</NavLink></li>
+        <li className='text-[#E3963E] pr-6 font-semibold text-base'><Link to="addArticles" className={isActive('/addArticles')} >Add Articles</Link></li>
+        <li className='text-[#E3963E] pr-6 font-semibold text-base'><Link>All Articles</Link></li>
+        <li className='text-[#E3963E] pr-6 font-semibold text-base'><Link>Subscription</Link></li>
+        <li className='text-[#E3963E] pr-6 font-semibold text-base'><Link>Dashboard</Link></li>
+        <li className='text-[#E3963E] pr-6 font-semibold text-base'><Link>My Articles</Link></li>
+        <li className='text-[#E3963E] pr-6 font-semibold text-base'><Link>Premium Articles</Link></li>
     </>
     return (
         <div><div className="navbar bg-base-100">
@@ -27,7 +32,7 @@ const Navbar = () => {
                         {navOptions}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">daisyUI</a>
+                <img src="logo.png" alt="" />
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -42,14 +47,9 @@ const Navbar = () => {
                         </div>
                     </div>
                     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                        <li>
-                            <a className="justify-between">
-                                Profile
-                                <span className="badge">New</span>
-                            </a>
-                        </li>
-                        <li><a>Settings</a></li>
-                        <li><a>Logout</a></li>
+                        <li>Profile</li>
+                        <li>Settings</li>
+                        <li>Logout</li>
                     </ul>
                 </div>
             </div>
