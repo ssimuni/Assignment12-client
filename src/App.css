@@ -32,3 +32,45 @@ body {
     background-color: #E3963E !important;
     color: white !important;
 }
+
+.even-row {
+    animation: slideInLeft 10.5s forwards;
+}
+
+.left {
+    animation: slideInLeft 2.5s forwards;
+}
+
+
+.odd-row {
+    animation: slideInRight 10.5s forwards;
+}
+
+.right {
+    animation: slideInRight 2.5s forwards;
+}
+
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}

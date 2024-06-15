@@ -21,7 +21,7 @@ const Banner = () => {
                     <div class="container relative flex px-6 py-16 mx-auto">
                         <div class="relative z-20 flex flex-col">
 
-                            <h1 class="flex flex-col text-6xl font-black leading-none text-gray-800 uppercase font-bebas-neue sm:text-8xl dark:text-white">
+                            <h1 class="left flex flex-col text-6xl font-black leading-none text-gray-800 uppercase font-bebas-neue sm:text-8xl dark:text-white">
                                 Trending
                                 <span class="text-5xl sm:text-7xl text-[#E3963E]">
                                     Articles
