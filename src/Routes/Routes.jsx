@@ -7,6 +7,7 @@ import AddArticles from "../Pages/AddArticles/AddArticles";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register"
 import PrivateRoute from "./PrivateRoute";
+import AllArticles from "../Pages/AllArticles/AllArticles";
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
             {
                 path: '/register',
                 element: <Register></Register>
+            },
+            {
+                path: '/allArticles',
+                element: <AllArticles></AllArticles>
             }
         ]
     },

@@ -81,7 +81,7 @@ const Navbar = () => {
     const navlinks = <>
         <li className='text-[#E3963E] ml-5 pr-3 font-semibold text-base'><NavLink to="/">Home</NavLink></li>
         <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="addArticles" >Add Articles</Link></li>
-        <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link>All Articles</Link></li>
+        <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="allArticles">All Articles</Link></li>
         <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link>Subscription</Link></li>
         <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link>Dashboard</Link></li>
         <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link>My Articles</Link></li>
