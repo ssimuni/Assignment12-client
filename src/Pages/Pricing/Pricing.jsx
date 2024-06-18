@@ -1,7 +1,19 @@
 import React from 'react'
 import SectionTitle from '../../Components/SectionTitle'
+import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
+import { AiFillRightCircle } from "react-icons/ai";
 
 const Pricing = () => {
+
+    const freebtn = e => {
+        Swal.fire({
+            title: 'Success!',
+            text: 'You can use Read&Digest free for 1 month!',
+            icon: 'success',
+            confirmButtonText: 'Cool'
+        })
+    }
     return (
         <div>
 
@@ -17,135 +29,119 @@ const Pricing = () => {
                             class="px-6 py-4 bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 border border-opacity-20 duration-200 transform rounded-lg lg:w-96 mx-auto">
                             <p class="text-lg font-medium text-gray-100">Free</p>
                             <h4 class="mt-2 text-4xl font-semibold text-gray-100">$00
-                                <span class="text-base font-normal text-gray-400">/ Month</span></h4>
-                            <p class="mt-4 text-gray-300">For most businesses that want to optimaize web queries.</p>
+                                <span class="text-base font-normal text-white">/ Month</span></h4>
+                            <p class="mt-4 text-white">For most businesses that want to optimaize web queries.</p>
 
                             <div class="mt-8 space-y-8">
                                 <div class="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#E3963E]"
-                                        viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                            clip-rule="evenodd" />
-                                    </svg>
+                                    <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
 
-                                    <span class="mx-4 text-gray-300">All limited links</span>
+                                    <span class="mx-4 text-white">Access to Basic Articles</span>
                                 </div>
 
                                 <div class="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#E3963E]"
-                                        viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                            clip-rule="evenodd" />
-                                    </svg>
+                                     <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
 
-                                    <span class="mx-4 text-gray-300">Own analytics platform</span>
+                                    <span class="mx-4 text-white">Breaking News Alerts</span>
                                 </div>
 
                                 <div class="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#E3963E]"
-                                        viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                            clip-rule="evenodd" />
-                                    </svg>
+                                     <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
 
-                                    <span class="mx-4 text-gray-300">Chat support</span>
+                                    <span class="mx-4 text-white">Basic Search Functionality</span>
                                 </div>
 
                                 <div class="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#E3963E]"
-                                        viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                            clip-rule="evenodd" />
-                                    </svg>
+                                     <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
 
-                                    <span class="mx-4 text-gray-300">Optimize hashtags</span>
+                                    <span class="mx-4 text-white">Personalized Content Recommendations</span>
                                 </div>
 
                                 <div class="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#E3963E]"
-                                        viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                            clip-rule="evenodd" />
-                                    </svg>
+                                     <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
 
-                                    <span class="mx-4 text-gray-300">Unlimited users</span>
+                                    <span class="mx-4 text-white">Image Galleries and Videos</span>
                                 </div>
+
+                                <div class="flex items-center">
+                                     <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
+
+                                    <span class="mx-4 text-white">Category Browsing</span>
+                                </div>
+
+                                <div class="flex items-center">
+                                     <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
+
+                                    <span class="mx-4 text-white">Article Sharing</span>
+                                </div>
+
+                               
                             </div>
 
-                            <button class="w-full px-4 py-2 mt-10 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-[#E3963E] rounded-md hover:bg-orange-500 focus:outline-none focus:bg-blue-600">Choose plan</button>
+                            <button onClick={freebtn} class="btn w-full border-none mt-10 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-[#E3963E] rounded-md hover:bg-orange-500 focus:outline-none text-[18px]">Try free for one month</button>
                         </div>
+
+
 
                         <div
                             class="px-6 py-4 bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 border border-opacity-20 duration-200 transform rounded-lg lg:w-96 mx-auto">
                             <p class="text-lg font-medium text-white dark:text-gray-100">Premium</p>
-                            <h4 class="mt-2 text-4xl font-semibold text-white dark:text-gray-100">$99
-                                <span class="text-base font-normal text-gray-600 dark:text-gray-400">/ Month</span></h4>
-                            <p class="mt-4 text-white dark:text-gray-300">For most businesses that want to optimaize web
+                            <h4 class="mt-2 text-4xl font-semibold text-white dark:text-gray-100">Less than $30
+                                <span class="text-base font-normal text-white dark:text-white">/ Month</span></h4>
+                            <p class="mt-4 text-white dark:text-white">For most businesses that want to optimaize web
                                 queries.</p>
 
                             <div class="mt-8 space-y-8">
                                 <div class="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#E3963E]"
-                                        viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                            clip-rule="evenodd" />
-                                    </svg>
+                                     <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
 
-                                    <span class="mx-4 text-gray-400 dark:text-gray-300">All limited links</span>
+                                    <span class="mx-4 text-white dark:text-white">Unlimited Article Access</span>
                                 </div>
 
                                 <div class="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#E3963E]"
-                                        viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                            clip-rule="evenodd" />
-                                    </svg>
+                                     <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
 
-                                    <span class="mx-4 text-gray-400 dark:text-gray-300">Own analytics platform</span>
+                                    <span class="mx-4 text-white dark:text-white">Ad-Free Experience</span>
                                 </div>
 
                                 <div class="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#E3963E]"
-                                        viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                            clip-rule="evenodd" />
-                                    </svg>
+                                     <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
 
-                                    <span class="mx-4 text-gray-400 dark:text-gray-300">Chat support</span>
+                                    <span class="mx-4 text-white dark:text-white">Offline Reading</span>
                                 </div>
 
                                 <div class="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#E3963E]"
-                                        viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                            clip-rule="evenodd" />
-                                    </svg>
+                                     <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
 
-                                    <span class="mx-4 text-gray-400 dark:text-gray-300">Optimize hashtags</span>
+                                    <span class="mx-4 text-white dark:text-white">Optimize hashtags</span>
                                 </div>
 
                                 <div class="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#E3963E]"
-                                        viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                            clip-rule="evenodd" />
-                                    </svg>
+                                     <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
 
-                                    <span class="mx-4 text-gray-400 dark:text-gray-300">Unlimited users</span>
+                                    <span class="mx-4 text-white dark:text-white">Early Access to Articles</span>
+                                </div>
+
+                                <div class="flex items-center">
+                                     <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
+
+                                    <span class="mx-4 text-white dark:text-white">Premium Newsletters</span>
+                                </div>
+
+                                <div class="flex items-center">
+                                     <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
+
+                                    <span class="mx-4 text-white dark:text-white">Interactive Features</span>
+                                </div>
+
+                                <div class="flex items-center">
+                                     <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
+
+                                    <span class="mx-4 text-white dark:text-white">Podcasts and Audio Articles</span>
                                 </div>
                             </div>
 
-                            <button class="w-full px-4 py-2 mt-10 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-[#E3963E] rounded-md hover:bg-orange-500 focus:outline-none focus:bg-blue-600">Choose plan</button>
+                            <Link to="/subscription" class="btn w-full border-none mt-10 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-[#E3963E] rounded-md hover:bg-orange-500 focus:outline-none text-[18px]">Choose plan</Link>
                         </div>
                     </div>
                 </div>

@@ -8,6 +8,10 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register"
 import PrivateRoute from "./PrivateRoute";
 import AllArticles from "../Pages/AllArticles/AllArticles";
+import Details from "../Pages/Details/Details";
+import Subscription from "../Pages/Subscription/Subscription";
+import MyProfile from "../Pages/MyProfile/MyProfile";
+import UpdateProfile from "../Pages/UpdateProfile/UpdateProfile";
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -15,7 +19,8 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <Home></Home>
+                element: <Home></Home>,
+                loader: () => fetch('http://localhost:5000/All-Articles')
             },
             {
                 path: '/addArticles',
@@ -31,7 +36,25 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/allArticles',
-                element: <AllArticles></AllArticles>
+                element: <AllArticles></AllArticles>,
+                loader: () => fetch('http://localhost:5000/All-Articles')
+            },
+            {
+                path: '/details/:_id',
+                element: <PrivateRoute><Details></Details></PrivateRoute>,
+                loader: () => fetch('http://localhost:5000/All-Articles')
+            },
+            {
+                path: '/subscription',
+                element: <PrivateRoute><Subscription></Subscription></PrivateRoute>
+            },
+            {
+                path: '/myProfile',
+                element: <PrivateRoute><MyProfile></MyProfile></PrivateRoute>
+            },
+            {
+                path: '/update',
+                element: <PrivateRoute><UpdateProfile></UpdateProfile></PrivateRoute>
             }
         ]
     },

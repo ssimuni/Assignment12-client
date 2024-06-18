@@ -1,14 +1,57 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
-
+import Swal from 'sweetalert2';
+import { AuthContext } from '../../Providers/AuthProvider'
 const AddArticles = () => {
+
+    const { user } = useContext(AuthContext);
+    const navigate = useNavigate;
+    const [selectedTags, setSelectedTags] = useState([]);
+    const [selectedPublisher, setSelectedPublisher] = useState(null);
+
+    const handleAddPost = event => {
+        event.preventDefault();
+        const form = event.target;
+
+        const image = form.image.value;
+        const title = form.title.value;
+        const tags = selectedTags.map(tag => tag.value);
+        const publisher = form.publisher.value;
+        const description = form.description.value;
+        const viewCount = 0;
+        const email = user.email;
+
+        const addArticle = { image, title, tags, publisher, description, viewCount, email };
+
+
+
+        fetch('http://localhost:5000/All-Articles', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(addArticle)
+        })
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data);
+                if (data.insertedId) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Successfully added article!',
+                        icon: 'success',
+                        confirmButtonText: 'Cool'
+                    }).then(() => {
+                        navigate('/allArticles');
+                    });
+                }
+            })
+    }
 
     const image = import.meta.env.VITE_imgHost;
     const imageApi = `https://api.imgbb.com/1/upload?key=${image}`;
 
-    const onSubmit = (data) => {
-        console.log(data)
-    }
 
     const customStyles = {
         control: (provided, state) => ({
@@ -138,7 +181,7 @@ const AddArticles = () => {
         <div>
 
 
-            <form action="https://fabform.io/f/xxxxx" method="post">
+            <form onSubmit={handleAddPost}>
 
                 <section class="py-24">
                     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -187,7 +230,7 @@ const AddArticles = () => {
                                     <label for="photobutton" class=" text-gray-600">Your Photo</label>
 
                                     <div>
-                                        <input id="photobutton" type="file" class="block w-full cursor-pointer appearance-none rounded-l-md border-b-2 rounded-lg border-[#E3963E]  bg-white px-3 py-2 text-sm transition focus:z-10 focus:border-[#E3963E] focus:outline-none focus:ring-1 focus:ring-[#E3963E] disabled:cursor-not-allowed disabled:bg-gray-200 disabled:opacity-75" />
+                                        <input id="image" name="image" type="file" class="block w-full cursor-pointer appearance-none rounded-l-md border-b-2 rounded-lg border-[#E3963E]  bg-white px-3 py-2 text-sm transition focus:z-10 focus:border-[#E3963E] focus:outline-none focus:ring-1 focus:ring-[#E3963E] disabled:cursor-not-allowed disabled:bg-gray-200 disabled:opacity-75" />
 
                                     </div>
                                 </div>
@@ -199,11 +242,12 @@ const AddArticles = () => {
                                         Select tags
                                     </h4>
                                     <Select
-                                        options={options}
-                                        styles={customStyles}
                                         isMulti
-                                        className="w-full"
-                                        placeholder="Select tags"
+                                        name="tags"
+                                        options={options}
+                                        value={selectedTags}
+                                        onChange={setSelectedTags}
+                                        styles={customStyles}
                                     />
                                 </div>
 
@@ -212,6 +256,7 @@ const AddArticles = () => {
                                         Select Publisher
                                     </h4>
                                     <Select
+                                        id="publisher" name="publisher"
                                         options={options}
                                         styles={customStyles}
                                         className="w-full"

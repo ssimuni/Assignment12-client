@@ -1,18 +1,30 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
-const AllArticlesCard = () => {
+const AllArticlesCard = ({ articles }) => {
+
+
+    const { _id, image, title, tags, publisher, description } = articles;
+
+    const truncateDescription = (desc, wordLimit) => {
+        const words = desc.split(' ');
+        return words.length > wordLimit ? words.slice(0, wordLimit).join(' ') + '...' : desc;
+    };
+
     return (
         <div>
 
             <div class="flex flex-col justify-center items-center max-w-sm mx-auto my-8">
-                <div style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1539185441755-769473a23570?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80)' }}
+                <div style={{ backgroundImage: `url(${image})` }}
                     class="bg-gray-300 h-64 w-full rounded-lg shadow-md bg-cover bg-center"></div>
                 <div class="w-56 md:w-64 bg-white -mt-10 shadow-lg rounded-lg overflow-hidden">
-                    <div class="py-2 text-center font-bold uppercase tracking-wide text-gray-800">Title</div>
-                    <div class="pt-1 pb-2 text-center font-semibold text-s text-gray-800">Publisher</div>
+                    <div class="p-2 text-center font-bold uppercase tracking-wide text-gray-800">{title}</div>
+                    <div class="pt-1 pb-2 text-center font-semibold text-s text-gray-800">{publisher}</div>
                     <div class=" py-2 px-3 bg-[#f5b872]">
-                        <h1 class="text-white">description</h1>
-                        <button class="text-center mx-auto flex justify-center bg-[#E3963E] text-xs text-white p-2 font-bold rounded uppercase hover:bg-[#e3af73]">Details</button>
+                        <h1 class="mb-3 text-white text-center">{truncateDescription(description, 15)}</h1>
+                        <Link className="mx-auto flex justify-center text-center border uppercase text-sm font-bold bg-opacity-40 text-gray-100  mt-3 p-2 rounded-lg hover:bg-orange-400" to={`/details/${_id}`}>
+                            Details
+                        </Link>
                     </div>
                 </div>
             </div>
