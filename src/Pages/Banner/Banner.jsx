@@ -11,26 +11,11 @@ import 'swiper/css/scrollbar';
 import { Link, useLoaderData } from 'react-router-dom';
 import { EffectCoverflow } from 'swiper/modules';
 import '../../App.css'
+import useArticles from '../../Hooks/useArticles';
 
 const Banner = () => {
-    const [topArticles, setTopArticles] = useState([]);
+    const [topArticles] = useArticles('?sortBy=viewCount&limit=6');
 
-    useEffect(() => {
-        const fetchTopArticles = async () => {
-            try {
-                const response = await fetch('http://localhost:5000/All-Articles?sortBy=viewCount&limit=6');
-                if (!response.ok) {
-                    throw new Error('Failed to fetch trending articles');
-                }
-                const data = await response.json();
-                setTopArticles(data);
-            } catch (error) {
-                console.error('Error fetching trending articles:', error);
-            }
-        };
-
-        fetchTopArticles();
-    }, []);
 
     return (
         <div>

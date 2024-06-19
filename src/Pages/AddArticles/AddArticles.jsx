@@ -3,12 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../Providers/AuthProvider'
+import useArticles from '../../Hooks/useArticles';
 const AddArticles = () => {
 
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
     const [selectedTags, setSelectedTags] = useState([]);
     const [selectedPublisher, setSelectedPublisher] = useState(null);
+    const [, refetch] = useArticles();
 
     const handleAddArticle = event => {
         event.preventDefault();
@@ -45,8 +47,9 @@ const AddArticles = () => {
                         icon: 'success',
                         confirmButtonText: 'Cool'
                     }).then(() => {
-                        navigate('/allArticles');
+                        navigate('/myArticles');
                     });
+                    refetch();
                 }
             })
     }

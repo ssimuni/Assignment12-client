@@ -1,34 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import AllArticlesCard from '../AllArticlesCard/AllArticlesCard';
 import PremiumCard from '../AllArticlesCard/PremiumCard';
 import SectionTitle from '../../Components/SectionTitle';
+import useArticles from '../../Hooks/useArticles'
 
 const AllArticles = () => {
-  const [allArticles, setAllArticles] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [publisher, setPublisher] = useState('');
   const [tags, setTags] = useState('');
 
-  useEffect(() => {
-    const fetchArticles = async () => {
-      let query = '?';
-      if (publisher) query += `publisher=${publisher}&`;
-      if (tags) query += `tags=${tags}&`;
-      const response = await fetch(`http://localhost:5000/All-Articles${query}`);
-      const data = await response.json();
-      setAllArticles(data);
-    };
-    fetchArticles();
-  }, [publisher, tags]);
+ 
+  const [allArticles] = useArticles();
 
   const handleSearchChange = event => {
     setSearchQuery(event.target.value);
   };
 
-  const filteredArticles = allArticles.filter(article =>
-    article.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredArticles = allArticles.filter(article => {
+    const matchesTitle = article.title.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesPublisher = publisher ? article.publisher.toLowerCase().includes(publisher.toLowerCase()) : true;
+    const matchesTags = tags
+      ? tags.split(',').every(tag => article.tags.includes(tag.trim().toLowerCase()))
+      : true;
+
+    return matchesTitle && matchesPublisher && matchesTags;
+  });
 
   return (
     <div>

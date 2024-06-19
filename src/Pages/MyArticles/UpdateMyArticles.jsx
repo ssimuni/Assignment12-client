@@ -24,7 +24,7 @@ const UpdateMyArticles = () => {
         const publisher = form.publisher.value;
         const description = form.description.value;
 
-        const updateArticle = { _id, image, title, tags, publisher, description };
+        const updateArticle = { image, title, tags, publisher, description };
 
 
 

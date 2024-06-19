@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useLoaderData, useParams } from 'react-router-dom'
 import SectionTitle from '../../Components/SectionTitle'
 import axios from 'axios';
+import { AuthContext } from '../../Providers/AuthProvider';
 const Details = () => {
 
     const articles = useLoaderData();
@@ -12,26 +13,32 @@ const Details = () => {
 
     const article = articles.find(article => article._id === _id);
 
+    const { user, email } = useContext(AuthContext);
 
     useEffect(() => {
         const updateViewCount = async () => {
-            try {
-                const response = await fetch(`http://localhost:5000/All-Articles/${_id}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
+
+            if (user?.email !== article.email) {
+                try {
+                    const response = await fetch(`http://localhost:5000/All-Articles/${_id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ email })
+                    });
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                } catch (error) {
+                    console.error('Failed to update view count:', error);
                 }
-            } catch (error) {
-                console.error('Failed to update view count:', error);
             }
+
         };
 
         updateViewCount();
-    }, [_id]);
+    }, [_id, email]);
 
     return (
         <div>

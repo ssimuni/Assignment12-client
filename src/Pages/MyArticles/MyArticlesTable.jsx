@@ -2,10 +2,12 @@ import React, { useContext } from 'react'
 import { AuthContext } from '../../Providers/AuthProvider';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import useArticles from '../../Hooks/useArticles';
 
 const MyArticlesTable = ({ article, index }) => {
     const { _id, image, title, status, isPremium } = article;
     const { user } = useContext(AuthContext);
+    const [, refetch] = useArticles();
 
     const handleDelete = _id => {
         // console.log(_id);
@@ -31,7 +33,9 @@ const MyArticlesTable = ({ article, index }) => {
                                 text: "Your Article has been deleted. Reload This page.",
                                 icon: "success"
                             });
+                            refetch();
                         }
+
                     })
             }
         });

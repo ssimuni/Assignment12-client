@@ -14,6 +14,10 @@ import MyProfile from "../Pages/MyProfile/MyProfile";
 import UpdateProfile from "../Pages/UpdateProfile/UpdateProfile";
 import MyArticles from "../Pages/MyArticles/MyArticles";
 import UpdateMyArticles from "../Pages/MyArticles/UpdateMyArticles";
+import Dashboard from "../Layout/Dashboard";
+import AllUsers from "../Pages/Dashboard/AllUsers";
+import AllArticlesAdmin from "../Pages/Dashboard/AllArticlesAdmin";
+import AddPublisher from "../Pages/Dashboard/AddPublisher";
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -64,10 +68,30 @@ export const router = createBrowserRouter([
                 loader: () => fetch('http://localhost:5000/All-Articles')
             },
             {
-                path: '/updateMyArticles/:_id',
+                path: '/updateMyArticles/:id',
                 element: <PrivateRoute><UpdateMyArticles></UpdateMyArticles></PrivateRoute>,
-                loader: () => fetch('http://localhost:5000/All-Articles')
+                loader: ({ params }) => fetch(`http://localhost:5000/All-Articles/${params.id}`)
             }
         ]
     },
+
+    {
+        path: 'dashboard',
+        element: <Dashboard></Dashboard>,
+        children: [
+            {
+                path: 'allUser',
+                element: <AllUsers></AllUsers>
+            },
+            {
+                path: 'allArticlesAdmin',
+                element: <AllArticlesAdmin></AllArticlesAdmin>
+            },
+            {
+                path: 'addPublisher',
+                element: <AddPublisher></AddPublisher>
+            }
+
+        ]
+    }
 ]);
