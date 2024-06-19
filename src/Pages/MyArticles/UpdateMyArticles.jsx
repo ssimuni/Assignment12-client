@@ -1,16 +1,20 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../Providers/AuthProvider'
-const AddArticles = () => {
+import { Navigate, useLoaderData } from 'react-router-dom';
+
+const UpdateMyArticles = () => {
+
+    const articles = useLoaderData();
+    const { _id, title, image, tags, publisher, description } = articles;
 
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
     const [selectedTags, setSelectedTags] = useState([]);
-    const [selectedPublisher, setSelectedPublisher] = useState(null);
 
-    const handleAddArticle = event => {
+    const handleUpdateArticle = event => {
         event.preventDefault();
         const form = event.target;
 
@@ -19,40 +23,38 @@ const AddArticles = () => {
         const tags = selectedTags.map(tag => tag.value);
         const publisher = form.publisher.value;
         const description = form.description.value;
-        const viewCount = 0;
-        const email = user.email;
-        const name = user.displayName;
-        const photoURL = user.photoURL;
 
-        const addArticle = { image, title, tags, publisher, description, viewCount, email, name, photoURL };
+        const updateArticle = { _id, image, title, tags, publisher, description };
 
 
 
-        fetch('http://localhost:5000/All-Articles', {
-            method: 'POST',
+        fetch(`http://localhost:5000/All-Articles/${_id}`, {
+            method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(addArticle)
+            body: JSON.stringify(updateArticle)
         })
             .then(res => res.json())
             .then(data => {
                 // console.log(data);
-                if (data.insertedId) {
+                if (data.modifiedCount > 0) {
                     Swal.fire({
                         title: 'Success!',
-                        text: 'Successfully added article!',
+                        text: 'Successfully updated article!',
                         icon: 'success',
                         confirmButtonText: 'Cool'
                     }).then(() => {
-                        navigate('/allArticles');
+                        navigate('/myArticles');
                     });
                 }
             })
     }
 
-    const image = import.meta.env.VITE_imgHost;
-    const imageApi = `https://api.imgbb.com/1/upload?key=${image}`;
+
+
+    // const image = import.meta.env.VITE_imgHost;
+    // const imageApi = `https://api.imgbb.com/1/upload?key=${image}`;
 
 
     const customStyles = {
@@ -183,7 +185,7 @@ const AddArticles = () => {
         <div>
 
 
-            <form onSubmit={handleAddArticle}>
+            <form onSubmit={handleUpdateArticle}>
 
                 <section class="py-24">
                     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -191,7 +193,7 @@ const AddArticles = () => {
                             <div class="lg:mb-0 mb-10">
                                 <div class="group w-full lg:h-[650px]">
                                     <div class="relative h-full">
-                                        <img src="stat1.jpg" alt="ContactUs tailwind section" class="w-full h-full lg:rounded-l-2xl  bg-blend-multiply" />
+                                        <img src="/stat1.jpg" alt="ContactUs tailwind section" class="w-full h-full lg:rounded-l-2xl  bg-blend-multiply" />
                                         <h1 class="font-manrope text-white text-5xl font-bold absolute top-11 left-20">Contact us</h1>
                                         <div class="absolute bottom-0 w-full lg:p-11 p-5">
                                             <div class="bg-black rounded-lg p-6 block bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-20  duration-200 transform">
@@ -221,10 +223,10 @@ const AddArticles = () => {
                             </div>
 
                             <div class="lg:h-[650px] p-5 lg:p-6  shadow-lg">
-                                <h2 class="text-[#E3963E] font-manrope text-4xl font-semibold leading-10 mb-11">Add your article</h2>
+                                <h2 class="text-[#E3963E] font-manrope text-4xl font-semibold leading-10 mb-11">Update your article</h2>
 
                                 <div className="relative mt-5">
-                                    <input id="title" name="title" type="text" className="peer placeholder-transparent h-10 w-full border-b-2 pl-5 rounded-lg border-[#E3963E]  focus:outline-none focus:borer-rose-600" placeholder="Title" />
+                                    <input id="title" name="title" type="text" className="peer placeholder-transparent h-10 w-full border-b-2 pl-5 rounded-lg border-[#E3963E]  focus:outline-none focus:borer-rose-600" placeholder="Title" defaultValue={title} />
                                     <label for="password" className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Title</label>
                                 </div>
 
@@ -250,6 +252,7 @@ const AddArticles = () => {
                                         value={selectedTags}
                                         onChange={setSelectedTags}
                                         styles={customStyles}
+                                        defaultValue={tags}
                                     />
                                 </div>
 
@@ -263,17 +266,18 @@ const AddArticles = () => {
                                         styles={customStyles}
                                         className="w-full"
                                         placeholder="Select publisher"
+                                        defaultValue={publisher}
                                     />
                                 </div>
 
 
                                 <div className="relative my-5">
-                                    <textarea id="description" name="description" type="text" className="peer placeholder-transparent h-15 w-full border-b-2 pl-5 rounded-lg border-[#E3963E]  focus:outline-none focus:borer-rose-600" placeholder="Description" />
+                                    <textarea id="description" name="description" type="text" className="peer placeholder-transparent h-15 w-full border-b-2 pl-5 rounded-lg border-[#E3963E]  focus:outline-none focus:borer-rose-600" placeholder="Description" defaultValue={description} />
                                     <label for="password" className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Description</label>
                                 </div>
 
 
-                                <button class="w-full h-12 text-white text-base font-semibold leading-6 rounded-full transition-all duration-700 hover:bg-orange-500 bg-[#E3963E] shadow-sm">Submit</button>
+                                <button class="w-full h-12 text-white text-base font-semibold leading-6 rounded-full transition-all duration-700 hover:bg-orange-500 bg-[#E3963E] shadow-sm">Update</button>
 
 
                             </div>
@@ -289,4 +293,4 @@ const AddArticles = () => {
     )
 }
 
-export default AddArticles
+export default UpdateMyArticles
