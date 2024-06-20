@@ -3,9 +3,10 @@ import { useContext } from "react";
 import { AuthContext } from '../../Providers/AuthProvider';
 import Swal from 'sweetalert2';
 import { useLocation, useNavigate } from 'react-router-dom';
+import SocialLogin from '../../Components/SocialLogin';
 
 const Login = () => {
-    const { signIn, signInWithGoogle, signInWithGithub } = useContext(AuthContext);
+    const { signIn, signInWithGoogle } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
     console.log(location);
@@ -63,26 +64,6 @@ const Login = () => {
         }
     };
 
-    const handleGithubLogin = async () => {
-        try {
-            await signInWithGithub();
-            Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: 'GitHub Login Successful!',
-            });
-            setEmail('');
-            setPassword('');
-            navigate(location?.state ? location.state : '/');
-        } catch (error) {
-            console.error(error);
-            Swal.fire({
-                icon: 'error',
-                title: 'GitHub Login Failed',
-                text: 'Failed to sign in with GitHub.',
-            });
-        }
-    };
 
     return (
         <div>
@@ -132,17 +113,10 @@ const Login = () => {
                                 <h2 className="text-2xl text-white font-bold">Sign in to unlock the <br /> best of Read&Digest.</h2>
                             </div>
 
+                            <button onClick={handleGoogleLogin}>
+                                <SocialLogin></SocialLogin>
+                            </button>
 
-                            <div className="mt-16 grid ">
-                                <button onClick={handleGoogleLogin} className="group h-12 px-5 lg:-ml-6 border-2 border-gray-300 rounded-full transition duration-300 
- hover:border-blue-400 focus:bg-blue-50 active:bg-blue-100">
-                                    <div className="relative flex items-center space-x-8 justify-center">
-                                        <img src="https://tailus.io/sources/blocks/social/preview/images/google.svg" className="absolute left-0 w-5" alt="google logo" />
-                                        <span className="block w-max font-semibold tracking-wide text-white text-sm transition duration-300 group-hover:text-blue-600 sm:text-base">Continue with Google</span>
-                                    </div>
-                                </button>
-
-                            </div>
 
                             <div className="mt-10 space-y-4 text-white text-center sm:-mb-8">
                                 <p className="text-xs">Don't have an account?<a href="/register" className="underline"> Register</a> here.</p>

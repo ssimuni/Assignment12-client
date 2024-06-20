@@ -25,8 +25,9 @@ const AddArticles = () => {
         const email = user.email;
         const name = user.displayName;
         const photoURL = user.photoURL;
+        const postedDate = new Date().toISOString().split('T')[0];
 
-        const addArticle = { image, title, tags, publisher, description, viewCount, email, name, photoURL };
+        const addArticle = { image, title, tags, publisher, description, viewCount, email, name, photoURL, postedDate };
 
 
 
@@ -41,6 +42,7 @@ const AddArticles = () => {
             .then(data => {
                 // console.log(data);
                 if (data.insertedId) {
+                    refetch();
                     Swal.fire({
                         title: 'Success!',
                         text: 'Successfully added article!',
@@ -49,7 +51,7 @@ const AddArticles = () => {
                     }).then(() => {
                         navigate('/myArticles');
                     });
-                    refetch();
+
                 }
             })
     }

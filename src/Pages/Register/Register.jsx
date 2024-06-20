@@ -3,9 +3,12 @@ import { useContext, useState } from "react";
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../Providers/AuthProvider';
 import { useNavigate } from 'react-router-dom';
+import useAxiosPublic from '../../Hooks/useAxiosPublic'
+import SocialLogin from '../../Components/SocialLogin';
 
 const Register = () => {
-    const { createUser, logOut } = useContext(AuthContext);
+    const axiosPublic = useAxiosPublic();
+    const { user, createUser, logOut, signInWithGoogle } = useContext(AuthContext);
     const navigate = useNavigate();
     const [registerError, setRegisterError] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -40,14 +43,26 @@ const Register = () => {
         if (password)
             await createUser(email, password, name, photo)
                 .then(result => {
-                    console.log(result.user);
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success',
-                        text: 'Registration Successful!',
-                    });
-                    logOut();
-                    navigate('/login');
+
+                    const userInfo = {
+                        name: name,
+                        email: email,
+                        photo: photo
+                    }
+                    axiosPublic.post('/users', userInfo)
+                        .then(res => {
+                            if (res.data.insertedID) {
+
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success',
+                                    text: 'Registration Successful!',
+                                });
+                                logOut();
+                                navigate('/login');
+
+                            }
+                        })
                 })
                 .catch(error => {
                     console.error(error);
@@ -57,6 +72,31 @@ const Register = () => {
                         text: error.message,
                     });
                 })
+    }
+
+    const handleGoogleSignIn = () => {
+        signInWithGoogle()
+            .then(result => {
+                console.log(result);
+                const userInfo = {
+                    email: result.user.email,
+                    name: result.user.displayName
+                }
+                axiosPublic.post('/users', userInfo)
+                    .then(res => {
+                        if (res.data.insertedID) {
+
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success',
+                                text: 'Registration Successful!',
+                            });
+                            logOut();
+                            navigate('/login');
+
+                        }
+                    })
+            })
     }
 
     return (
@@ -114,6 +154,7 @@ const Register = () => {
                                 Register
                             </button>
                         </div>
+
                     </form>
 
                     <div className="right w-full mb-20 lg:mb-0 lg:-mt-64 lg:w-2/6 ml-auto rounded-2xl bg-[url('/stat1.jpg')] bg-cover">
@@ -126,6 +167,10 @@ const Register = () => {
                                     <input id="termsConditions" type="checkbox" required />
                                     <label class="text-s  ml-2" for="termsConditions" />I agree to the terms and conditions.
                                 </div>
+
+                                <button onClick={handleGoogleSignIn}>
+                                    <SocialLogin></SocialLogin>
+                                </button>
 
                             </div>
                             <div className="space-y-4 text-white text-center sm:-mb-8">

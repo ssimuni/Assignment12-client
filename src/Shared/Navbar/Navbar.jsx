@@ -8,6 +8,8 @@ const Navbar = () => {
     const [loadingUser, setLoadingUser] = useState(true);
     const [isHovered, setIsHovered] = useState(false);
 
+    const isAdmin = true;
+
     useEffect(() => {
         setLoadingUser(true);
         const timeout = setTimeout(() => {
@@ -79,11 +81,15 @@ const Navbar = () => {
     };
 
     const navlinks = <>
+
         <li className='text-[#E3963E] ml-5 pr-3 font-semibold text-base'><NavLink to="/">Home</NavLink></li>
         <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="addArticles" >Add Articles</Link></li>
         <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="allArticles">All Articles</Link></li>
         <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="subscription">Subscription</Link></li>
-        <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="dashboard">Dashboard</Link></li>
+        {
+            isAdmin ? <> <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="dashboard">Dashboard</Link></li> </>
+                : <> </>
+        }
         <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="myProfile">My Profile</Link></li>
         <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="myArticles">My Articles</Link></li>
         <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="premiumArticles">Premium Articles</Link></li>

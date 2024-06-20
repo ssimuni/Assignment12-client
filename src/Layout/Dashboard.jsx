@@ -6,11 +6,14 @@ import { HiHome } from 'react-icons/hi'
 import { PiArticleNyTimesFill } from 'react-icons/pi'
 import { RiProfileFill } from 'react-icons/ri'
 import { NavLink, Outlet } from 'react-router-dom'
+import useArticles from '../Hooks/useArticles';
 
 const Dashboard = () => {
+
+    const [article, refetch] = useArticles();
     return (
         <div className='flex'>
-            <aside class="flex flex-col w-64 h-screen px-4 py-8 overflow-y-auto bg-[#E3963E] border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
+            <aside class="flex flex-col w-64 min-h-screen px-4 py-8 overflow-y-auto bg-[#E3963E] border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
 
                 <div class="flex flex-col items-center mt-6 -mx-2">
                     <img class="object-cover w-24 h-24 mx-2 rounded-full" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="avatar" />
@@ -36,6 +39,7 @@ const Dashboard = () => {
                                 <PiArticleNyTimesFill class="w-5 h-5"></PiArticleNyTimesFill>
 
                                 <span class="mx-4 font-medium">All Articles</span>
+                                <span class="mx-4 font-medium bg-white text-right px-2 rounded-lg text-[#E3963E] dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">{article.length}</span>
                             </div>
                         </NavLink>
 
