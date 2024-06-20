@@ -41,7 +41,6 @@ const AllUsers = () => {
                       <th class="p-2 whitespace-nowrap">
                         <div class="font-semibold text-left"></div>
                       </th>
-
                     </tr>
                   </thead>
                   <tbody class="text-sm divide-y divide-gray-300">
@@ -58,7 +57,7 @@ const AllUsers = () => {
                           <div class="text-left">{user.email}</div>
                         </td>
                         <td class="p-2 whitespace-nowrap">
-                          <div class="text-left">role</div>
+                          <div class="text-left">Role</div>
                         </td>
                         <td class="flex items-center justify-center p-2 whitespace-nowrap">
                           <button className="uppercase text-xs font-bold w-24  bg-[#E3963E] text-gray-100 p-3 rounded-lg text-center place-items-center justify-center flex ">
