@@ -26,8 +26,11 @@ const AddArticles = () => {
         const name = user.displayName;
         const photoURL = user.photoURL;
         const postedDate = new Date().toISOString().split('T')[0];
+        const published = 'No';
+        const status = 'Pending';
+        const isPremium = 'No'
 
-        const addArticle = { image, title, tags, publisher, description, viewCount, email, name, photoURL, postedDate };
+        const addArticle = { image, title, tags, publisher, description, viewCount, email, name, photoURL, postedDate, published, status, isPremium };
 
 
 

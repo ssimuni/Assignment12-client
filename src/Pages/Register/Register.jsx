@@ -47,7 +47,8 @@ const Register = () => {
                     const userInfo = {
                         name: name,
                         email: email,
-                        photo: photo
+                        photo: photo,
+                        role: 'User'
                     }
                     axiosPublic.post('/users', userInfo)
                         .then(res => {
@@ -57,10 +58,10 @@ const Register = () => {
                                     icon: 'success',
                                     title: 'Success',
                                     text: 'Registration Successful!',
+                                }).then(() => {
+                                    logOut();
+                                    navigate('/login');
                                 });
-                                logOut();
-                                navigate('/login');
-
                             }
                         })
                 })
@@ -90,10 +91,10 @@ const Register = () => {
                                 icon: 'success',
                                 title: 'Success',
                                 text: 'Registration Successful!',
+                            }).then(() => {
+                                logOut();
+                                navigate('/login');
                             });
-                            logOut();
-                            navigate('/login');
-
                         }
                     })
             })
