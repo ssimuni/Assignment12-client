@@ -18,10 +18,12 @@ import Dashboard from "../Layout/Dashboard";
 import AllUsers from "../Pages/Dashboard/AllUsers";
 import AllArticlesAdmin from "../Pages/Dashboard/AllArticlesAdmin";
 import AddPublisher from "../Pages/Dashboard/AddPublisher";
+import Error from "../Pages/Error/Error";
 export const router = createBrowserRouter([
     {
         path: "/",
         element: <Main></Main>,
+        errorElement: <Error></Error>,
         children: [
             {
                 path: '/',
@@ -78,6 +80,7 @@ export const router = createBrowserRouter([
     {
         path: 'dashboard',
         element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+        errorElement: <Error></Error>,
         children: [
             {
                 path: 'allUser',

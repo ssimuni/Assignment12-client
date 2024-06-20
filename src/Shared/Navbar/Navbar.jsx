@@ -1,14 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { AuthContext } from '../../Providers/AuthProvider'
+import useUsers from '../../Hooks/useUsers'
 
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
     const [loadingUser, setLoadingUser] = useState(true);
     const [isHovered, setIsHovered] = useState(false);
+    const [users, refetch] = useUsers();
 
-    const isAdmin = true;
 
     useEffect(() => {
         setLoadingUser(true);
@@ -80,20 +81,25 @@ const Navbar = () => {
         );
     };
 
-    const navlinks = <>
+    const navlinks = (
+        <>
+            <li className='text-[#E3963E] ml-5 pr-3 font-semibold text-base'><NavLink to="/">Home</NavLink></li>
+            {user && (
+                <>
+                    <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="addArticles">Add Articles</Link></li>
+                    <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="subscription">Subscription</Link></li>
 
-        <li className='text-[#E3963E] ml-5 pr-3 font-semibold text-base'><NavLink to="/">Home</NavLink></li>
-        <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="addArticles" >Add Articles</Link></li>
-        <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="allArticles">All Articles</Link></li>
-        <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="subscription">Subscription</Link></li>
-        {
-            isAdmin ? <> <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="dashboard">Dashboard</Link></li> </>
-                : <> </>
-        }
-        <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="myProfile">My Profile</Link></li>
-        <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="myArticles">My Articles</Link></li>
-        <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="premiumArticles">Premium Articles</Link></li>
-    </>
+                    <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="dashboard">Dashboard</Link></li>
+
+                    <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="myProfile">My Profile</Link></li>
+                    <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="myArticles">My Articles</Link></li>
+                    <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="premiumArticles">Premium Articles</Link></li>
+                </>
+            )}
+            <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="allArticles">All Articles</Link></li>
+        </>
+    );
+
     return (
         <div className="navbar bg-base-100 ">
             <div className="navbar-start">
@@ -107,7 +113,7 @@ const Navbar = () => {
                 </div>
 
 
-                <img src="/logo.png" alt="" />
+                <img className='w-24' src="/logo.png" alt="" />
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">

@@ -1,10 +1,9 @@
-import React, { useContext, useState, useEffect } from 'react'
-import { useLoaderData } from 'react-router-dom'
+import React, { useContext } from 'react';
+import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProvider';
 import MyArticlesTable from './MyArticlesTable';
 
 const MyArticles = () => {
-
     const articles = useLoaderData();
     const { user } = useContext(AuthContext);
 
@@ -12,18 +11,27 @@ const MyArticles = () => {
         return (
             article.name === user.displayName &&
             article.email === user.email
-        )
-    })
+        );
+    });
 
     return (
         <div>
-            <section class=" container mx-auto p-6 font-mono">
-                <div class=" border w-full mb-8 overflow-hidden rounded-lg shadow-lg">
-                    <div class="w-full overflow-x-auto">
-                        <table class="w-full">
-
-                            <div className=''>
-
+            <section className="container mx-auto p-6 font-mono">
+                <div className="border w-full mb-8 overflow-hidden rounded-lg shadow-lg">
+                    <div className="w-full overflow-x-auto">
+                        <table className="w-full">
+                            <thead>
+                                <tr className="text-sm font-semibold text-gray-600 bg-gray-100">
+                                    <th className="text-center px-4 py-3">Serial</th>
+                                    <th className="px-4 py-3 text-left">Title with Post Image</th>
+                                    <th className="px-4 py-3 text-left">Premium</th>
+                                    <th className="px-4 py-3 text-left">Status</th>
+                                    <th className="px-4 py-3 text-center">Details</th>
+                                    <th className="px-4 py-3 text-center">Update</th>
+                                    <th className="px-4 py-3 text-center">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                                 {myArticles.map((article, index) => (
                                     <MyArticlesTable
                                         key={article._id}
@@ -31,14 +39,13 @@ const MyArticles = () => {
                                         index={index}
                                     />
                                 ))}
-
-                            </div>
+                            </tbody>
                         </table>
                     </div>
                 </div>
             </section>
         </div>
-    )
-}
+    );
+};
 
-export default MyArticles
+export default MyArticles;
