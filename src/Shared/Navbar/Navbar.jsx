@@ -55,7 +55,7 @@ const Navbar = () => {
                                 <div
                                     className="absolute top-10 right-0 bg-white border-2 shadow-lg rounded-lg text-black px-1 py-0.5 opacity-0 group-hover:opacity-100 transition-opacity "
                                 >
-                                    {loadingUser ? 'Loading...' : user.displayName}
+                                    {loadingUser ? 'Loading....' : user.displayName}
 
                                 </div>
                             )}
