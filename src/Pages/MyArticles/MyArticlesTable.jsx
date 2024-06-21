@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import useArticles from '../../Hooks/useArticles';
 
 const MyArticlesTable = ({ article, index }) => {
-    const { _id, image, title, status, isPremium } = article;
+    const { _id, image, title, status, isPremium, declineReason } = article;
     const { user } = useContext(AuthContext);
     const [, refetch] = useArticles();
 
@@ -38,6 +38,15 @@ const MyArticlesTable = ({ article, index }) => {
         });
     };
 
+    const handleShowDeclineReason = (reason) => {
+        Swal.fire({
+            title: 'Reason for Decline',
+            text: reason,
+            icon: 'error',
+            confirmButtonText: 'Close'
+        });
+    };
+
     return (
         <tr className="text-gray-700">
             <td className="text-center px-4 py-3">{index + 1}</td>
@@ -53,7 +62,17 @@ const MyArticlesTable = ({ article, index }) => {
                 </div>
             </td>
             <td className="px-4 py-3 text-ms font-semibold lg:w-28">{isPremium}</td>
-            <td className="px-4 py-3 text-ms font-semibold lg:w-28">{status}</td>
+            <td className="px-4 py-4 text-ms font-semibold lg:w-28 flex items-center">
+                {status}
+                {status === "Declined" && (
+                    <button
+                        className="ml-2 text-xs p-1 bg-[#E3963E] text-white rounded"
+                        onClick={() => handleShowDeclineReason(declineReason)}
+                    >
+                         Reason
+                    </button>
+                )}
+            </td>
             <td className="text-xs">
                 <Link to={`/details/${_id}`} className="mx-auto justify-center flex w-14 text-center p-2 bg-[#E3963E] text-white rounded">
                     Details

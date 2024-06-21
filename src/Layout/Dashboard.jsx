@@ -8,11 +8,16 @@ import { RiProfileFill } from 'react-icons/ri'
 import { NavLink, Outlet } from 'react-router-dom'
 import useArticles from '../Hooks/useArticles';
 import { AuthContext } from '../Providers/AuthProvider'
+import usePublisher from '../Hooks/usePublisher'
+import useUsers from '../Hooks/useUsers'
+import { BsNewspaper } from 'react-icons/bs'
 
 const Dashboard = () => {
     const { user } = useContext(AuthContext);
 
     const [article, refetch] = useArticles();
+    const [publishers,] = usePublisher();
+    const [users,] = useUsers();
     return (
         <div className='flex'>
             <aside class="flex flex-col w-64 min-h-screen px-4 py-8 overflow-y-auto bg-[#E3963E] border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
@@ -32,6 +37,7 @@ const Dashboard = () => {
                                 <FaUser class="w-5 h-5"></FaUser>
 
                                 <span class="mx-4 font-medium">All Users</span>
+                                <span class="text-right mx-6 font-medium bg-white px-2 rounded-lg text-[#E3963E] dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">{users.length}</span>
                             </div>
                         </NavLink>
 
@@ -48,9 +54,10 @@ const Dashboard = () => {
                         <NavLink to="/dashboard/addPublisher" >
 
                             <div class="flex items-center px-4 py-2 mt-3 text-white transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
-                                <GiNewspaper class="w-5 h-5"></GiNewspaper>
+                                <BsNewspaper class="w-5 h-5"></BsNewspaper>
 
                                 <span class="mx-4 font-medium">Add Publishers</span>
+                                <span class="mx-4 font-medium bg-white text-right px-2 rounded-lg text-[#E3963E] dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">{publishers.length}</span>
                             </div>
                         </NavLink>
 
