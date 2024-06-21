@@ -69,7 +69,7 @@ const MyArticlesTable = ({ article, index }) => {
                         className="ml-2 text-xs p-1 bg-[#E3963E] text-white rounded"
                         onClick={() => handleShowDeclineReason(declineReason)}
                     >
-                         Reason
+                        Reason
                     </button>
                 )}
             </td>

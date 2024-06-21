@@ -2,13 +2,14 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { AuthContext } from '../../Providers/AuthProvider'
 import useUsers from '../../Hooks/useUsers'
+import useAdmin from '../../Hooks/useAdmin'
 
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
     const [loadingUser, setLoadingUser] = useState(true);
     const [isHovered, setIsHovered] = useState(false);
-    const [users, refetch] = useUsers();
+    // const [isAdmin] = useAdmin();
 
 
     useEffect(() => {
@@ -90,9 +91,10 @@ const Navbar = () => {
                     <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="addArticles">Add Articles</Link></li>
                     <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="premiumArticles">Premium Articles</Link></li>
                     <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="subscription">Subscription</Link></li>
-
+                    {/* {isAdmin && (
+                        <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="dashboard">Dashboard</Link></li>
+                    )} */}
                     <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="dashboard">Dashboard</Link></li>
-
                     <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="myProfile">My Profile</Link></li>
                     <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="myArticles">My Articles</Link></li>
 

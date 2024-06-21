@@ -4,6 +4,10 @@ import Select from 'react-select';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../Providers/AuthProvider'
 import useArticles from '../../Hooks/useArticles';
+import useAxiosPublic from '../../Hooks/useAxiosPublic';
+
+const image = import.meta.env.VITE_imgHost;
+const imageApi = `https://api.imgbb.com/1/upload?key=${image}`;
 
 const AddArticles = () => {
 
@@ -12,14 +16,39 @@ const AddArticles = () => {
     const [selectedTags, setSelectedTags] = useState([]);
     const [selectedPublisher, setSelectedPublisher] = useState(null);
     const [, refetch] = useArticles();
+    const axiosPublic = useAxiosPublic();
+    const [selectedImage, setSelectedImage] = useState(null);
 
-    const handleAddArticle = event => {
+    const uploadImage = async (imageFile) => {
+        const formData = new FormData();
+        formData.append('image', imageFile);
+
+        try {
+            const response = await fetch(imageApi, {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (!response.ok) {
+                throw new Error('Image upload failed');
+            }
+
+            const result = await response.json();
+            return result.data.url; // Return the URL of the uploaded image
+        } catch (error) {
+            console.error('Error uploading image:', error);
+            return null;
+        }
+    };
+
+
+    const handleAddArticle = async (event) => {
         event.preventDefault();
-        const form = event.target;
 
-        const image = form.image.value;
+        const form = event.target;
+        const imageFile = selectedImage;
         const title = form.title.value;
-        const tags = selectedTags.map(tag => tag.value);
+        const tags = selectedTags.map((tag) => tag.value);
         const publisher = form.publisher.value;
         const description = form.description.value;
         const viewCount = 0;
@@ -29,12 +58,40 @@ const AddArticles = () => {
         const postedDate = new Date().toISOString().split('T')[0];
         const published = 'No';
         const status = 'Pending';
-        const isPremium = 'No'
+        const isPremium = 'No';
 
-        const addArticle = { image, title, tags, publisher, description, viewCount, email, name, photoURL, postedDate, published, status, isPremium };
+        // Upload image to ImageBB
+        const imageUrl = await uploadImage(imageFile);
 
+        if (!imageUrl) {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Failed to upload image',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            });
+            return;
+        }
 
+        const addArticle = {
+            image: imageUrl,
+            title,
+            tags,
+            publisher,
+            description,
+            viewCount,
+            email,
+            name,
+            photoURL,
+            postedDate,
+            published,
+            status,
+            isPremium
+        };
 
+        console.log(addArticle);
+
+        // Submit article data to your server
         fetch('http://localhost:5000/All-Articles', {
             method: 'POST',
             headers: {
@@ -44,7 +101,6 @@ const AddArticles = () => {
         })
             .then(res => res.json())
             .then(data => {
-                // console.log(data);
                 if (data.insertedId) {
                     refetch();
                     Swal.fire({
@@ -55,13 +111,18 @@ const AddArticles = () => {
                     }).then(() => {
                         navigate('/myArticles');
                     });
-
                 }
             })
-    }
-
-    const image = import.meta.env.VITE_imgHost;
-    const imageApi = `https://api.imgbb.com/1/upload?key=${image}`;
+            .catch(error => {
+                console.error('Error adding article:', error);
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Failed to add article',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                });
+            });
+    };
 
 
     const customStyles = {
@@ -241,7 +302,14 @@ const AddArticles = () => {
                                     <label for="photobutton" class=" text-gray-600">Your Photo</label>
 
                                     <div>
-                                        <input id="image" name="image" type="file" class="block w-full cursor-pointer appearance-none rounded-l-md border-b-2 rounded-lg border-[#E3963E]  bg-white px-3 py-2 text-sm transition focus:z-10 focus:border-[#E3963E] focus:outline-none focus:ring-1 focus:ring-[#E3963E] disabled:cursor-not-allowed disabled:bg-gray-200 disabled:opacity-75" />
+                                        <input
+                                            id="image"
+                                            name="image"
+                                            type="file"
+                                            className="block w-full cursor-pointer appearance-none rounded-l-md border-b-2 rounded-lg border-[#E3963E] bg-white px-3 py-2 text-sm transition focus:z-10 focus:border-[#E3963E] focus:outline-none focus:ring-1 focus:ring-[#E3963E] disabled:cursor-not-allowed disabled:bg-gray-200 disabled:opacity-75"
+                                            onChange={(e) => setSelectedImage(e.target.files[0])}
+                                            required
+                                        />
 
                                     </div>
                                 </div>
