@@ -52,16 +52,16 @@ const Register = () => {
                     }
                     axiosPublic.post('/users', userInfo)
                         .then(res => {
-                            if (res.data.insertedID) {
-
+                            console.log(res);
+                            if (res.data.insertedId) {
+                                logOut();
+                                navigate('/login');
                                 Swal.fire({
                                     icon: 'success',
                                     title: 'Success',
                                     text: 'Registration Successful!',
-                                }).then(() => {
-                                    logOut();
-                                    navigate('/login');
-                                });
+                                })
+
                             }
                         })
                 })
@@ -85,16 +85,14 @@ const Register = () => {
                 }
                 axiosPublic.post('/users', userInfo)
                     .then(res => {
-                        if (res.data.insertedID) {
-
+                        if (res.data.insertedId) {
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Success',
                                 text: 'Registration Successful!',
-                            }).then(() => {
-                                logOut();
-                                navigate('/login');
-                            });
+                            })
+                            logOut();
+                            navigate('/login');
                         }
                     })
             })

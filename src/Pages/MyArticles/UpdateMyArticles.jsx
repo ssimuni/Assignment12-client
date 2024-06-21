@@ -28,7 +28,7 @@ const UpdateMyArticles = () => {
 
 
 
-        fetch(`http://localhost:5000/All-Articles/${_id}`, {
+        fetch(`http://localhost:5000/All-Articles1/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -37,7 +37,7 @@ const UpdateMyArticles = () => {
         })
             .then(res => res.json())
             .then(data => {
-                // console.log(data);
+                console.log(data);
                 if (data.modifiedCount > 0) {
                     Swal.fire({
                         title: 'Success!',
