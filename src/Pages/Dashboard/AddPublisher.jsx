@@ -6,22 +6,59 @@ import { AuthContext } from '../../Providers/AuthProvider'
 import usePublisher from '../../Hooks/usePublisher';
 import SectionTitle from '../../Components/SectionTitle'
 
+const image = import.meta.env.VITE_imgHost;
+const imageApi = `https://api.imgbb.com/1/upload?key=${image}`;
+
 const AddPublisher = () => {
 
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [publishers, refetch] = usePublisher();
 
+  const [selectedImage, setSelectedImage] = useState(null);
 
-  const handleAddPublisher = event => {
+  const uploadImage = async (imageFile) => {
+    const formData = new FormData();
+    formData.append('image', imageFile);
+
+    try {
+      const response = await fetch(imageApi, {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error('Image upload failed');
+      }
+
+      const result = await response.json();
+      return result.data.url; // Return the URL of the uploaded image
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      return null;
+    }
+  };
+
+
+  const handleAddPublisher = async (event) => {
     event.preventDefault();
     const form = event.target;
 
-    const image = form.image.value;
+    const imageFile = selectedImage;
+    const imageUrl = await uploadImage(imageFile);
     const name = form.name.value;
 
-    const addPublisher = { image, name };
+    if (!imageUrl) {
+      Swal.fire({
+        title: 'Error!',
+        text: 'Failed to upload image',
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      });
+      return;
+    }
 
+    const addPublisher = { image: imageUrl, name };
 
     fetch('http://localhost:5000/publishers', {
       method: 'POST',
@@ -78,7 +115,7 @@ const AddPublisher = () => {
                     <label for="photobutton" class=" text-[#E3963E] text-sm">Your Photo</label>
 
                     <div>
-                      <input id="image" name="image" type="file" class="block w-full cursor-pointer appearance-none rounded-l-md border-b-2 rounded-lg border-[#E3963E]  bg-white px-3 py-2 text-sm transition focus:z-10 focus:border-[#E3963E] focus:outline-none focus:ring-1 focus:ring-[#E3963E] disabled:cursor-not-allowed disabled:bg-gray-200 disabled:opacity-75" />
+                      <input onChange={(e) => setSelectedImage(e.target.files[0])} id="image" name="image" type="file" class="block w-full cursor-pointer appearance-none rounded-l-md border-b-2 rounded-lg border-[#E3963E]  bg-white px-3 py-2 text-sm transition focus:z-10 focus:border-[#E3963E] focus:outline-none focus:ring-1 focus:ring-[#E3963E] disabled:cursor-not-allowed disabled:bg-gray-200 disabled:opacity-75" />
                     </div>
                   </div>
                   <div class="relative">

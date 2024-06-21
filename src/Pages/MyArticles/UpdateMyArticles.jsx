@@ -5,6 +5,9 @@ import Swal from 'sweetalert2';
 import { AuthContext } from '../../Providers/AuthProvider'
 import { Navigate, useLoaderData } from 'react-router-dom';
 
+const image = import.meta.env.VITE_imgHost;
+const imageApi = `https://api.imgbb.com/1/upload?key=${image}`;
+
 const UpdateMyArticles = () => {
 
     const articles = useLoaderData();
@@ -13,18 +16,54 @@ const UpdateMyArticles = () => {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
     const [selectedTags, setSelectedTags] = useState([]);
+    const [selectedImage, setSelectedImage] = useState(null);
 
-    const handleUpdateArticle = event => {
+
+    const uploadImage = async (imageFile) => {
+        const formData = new FormData();
+        formData.append('image', imageFile);
+
+        try {
+            const response = await fetch(imageApi, {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (!response.ok) {
+                throw new Error('Image upload failed');
+            }
+
+            const result = await response.json();
+            return result.data.url; // Return the URL of the uploaded image
+        } catch (error) {
+            console.error('Error uploading image:', error);
+            return null;
+        }
+    };
+
+    const handleUpdateArticle = async (event) => {
         event.preventDefault();
         const form = event.target;
 
-        const image = form.image.value;
+        const imageFile = selectedImage;
+        const imageUrl = await uploadImage(imageFile);
         const title = form.title.value;
         const tags = selectedTags.map(tag => tag.value);
         const publisher = form.publisher.value;
         const description = form.description.value;
 
-        const updateArticle = { image, title, tags, publisher, description };
+
+        if (!imageUrl) {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Failed to upload image',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            });
+            return;
+        }
+
+        const updateArticle = { image: imageUrl, title, tags, publisher, description };
 
 
 
@@ -50,11 +89,6 @@ const UpdateMyArticles = () => {
                 }
             })
     }
-
-
-
-    // const image = import.meta.env.VITE_imgHost;
-    // const imageApi = `https://api.imgbb.com/1/upload?key=${image}`;
 
 
     const customStyles = {
@@ -234,7 +268,7 @@ const UpdateMyArticles = () => {
                                     <label for="photobutton" class=" text-gray-600">Your Photo</label>
 
                                     <div>
-                                        <input id="image" name="image" type="file" class="block w-full cursor-pointer appearance-none rounded-l-md border-b-2 rounded-lg border-[#E3963E]  bg-white px-3 py-2 text-sm transition focus:z-10 focus:border-[#E3963E] focus:outline-none focus:ring-1 focus:ring-[#E3963E] disabled:cursor-not-allowed disabled:bg-gray-200 disabled:opacity-75" />
+                                        <input onChange={(e) => setSelectedImage(e.target.files[0])} id="image" name="image" type="file" class="block w-full cursor-pointer appearance-none rounded-l-md border-b-2 rounded-lg border-[#E3963E]  bg-white px-3 py-2 text-sm transition focus:z-10 focus:border-[#E3963E] focus:outline-none focus:ring-1 focus:ring-[#E3963E] disabled:cursor-not-allowed disabled:bg-gray-200 disabled:opacity-75" />
 
                                     </div>
                                 </div>

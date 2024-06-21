@@ -4,10 +4,17 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
+const image = import.meta.env.VITE_imgHost;
+const imageApi = `https://api.imgbb.com/1/upload?key=${image}`;
+
 const UpdateProfile = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
+    const { user, updateUserInfo } = useContext(AuthContext);
+    const [name, setName] = useState('');
+    const [photoURL, setPhotoURL] = useState('');
+    const [selectedImage, setSelectedImage] = useState(null);
 
     const onSubmit = (data) => {
         Swal.fire({
@@ -18,9 +25,7 @@ const UpdateProfile = () => {
             navigate('/myProfile');
         });
     };
-    const { user, updateUserInfo } = useContext(AuthContext);
-    const [name, setName] = useState('');
-    const [photoURL, setPhotoURL] = useState('');
+
 
     useEffect(() => {
         if (user) {
@@ -28,6 +33,7 @@ const UpdateProfile = () => {
             setPhotoURL(user.photoURL || '');
         }
     }, [user]);
+
     const handleNameChange = (e) => {
         setName(e.target.value);
     };
@@ -38,7 +44,26 @@ const UpdateProfile = () => {
 
     const handleSaveChanges = async () => {
         try {
-            await updateUserInfo(name, photoURL);
+            let imageUrl = photoURL; // Default to current photoURL
+
+            if (selectedImage) {
+                const formData = new FormData();
+                formData.append('image', selectedImage);
+
+                const response = await fetch(imageApi, {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (!response.ok) {
+                    throw new Error('Image upload failed');
+                }
+
+                const result = await response.json();
+                imageUrl = result.data.url; // Update imageUrl with the uploaded image URL
+            }
+
+            await updateUserInfo(name, imageUrl);
         } catch (error) {
             console.error('Error updating profile:', error.message);
             Swal.fire({
@@ -48,6 +73,11 @@ const UpdateProfile = () => {
             });
         }
     };
+
+    const onFileChange = (e) => {
+        setSelectedImage(e.target.files[0]);
+    };
+
 
     return (
         <div className="container mx-auto my-10 border border-blue-gray-700 rounded-lg shadow-lg w-[600px]">
@@ -62,9 +92,14 @@ const UpdateProfile = () => {
                 </div>
 
 
-                <div className="relative mt-8">
-                    <input id="name" name="name" type="text" onChange={handlePhotoURLChange} value={photoURL} className="peer placeholder-transparent h-10 w-full border-b-2 pl-5 rounded-lg border-[#E3963E]  focus:outline-none focus:borer-rose-600" placeholder="Title" />
-                    <label for="password" className="absolute left-0 -top-3.5 text-[#E3963E] text-sm peer-placeholder-shown:text-base font-semibold peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Profile Picture</label>
+                <div className="relative mt-12">
+                    <input
+                        type="file"
+                        onChange={onFileChange}
+                        className="peer placeholder-transparent h-10 w-full border-b-2 pl-5 rounded-lg border-[#E3963E]  focus:outline-none focus:borer-rose-600"
+                        placeholder="Profile Picture"
+                    />
+                    <label for="password" className="absolute left-0 -top-6 text-[#E3963E] text-sm peer-placeholder-shown:text-base font-semibold peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Profile Picture</label>
                     {errors.name && <p className="text-red-500 mt-1">{errors.name.message}</p>}
                 </div>
 
