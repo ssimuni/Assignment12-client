@@ -19,6 +19,7 @@ import AllUsers from "../Pages/Dashboard/AllUsers";
 import AllArticlesAdmin from "../Pages/Dashboard/AllArticlesAdmin";
 import AddPublisher from "../Pages/Dashboard/AddPublisher";
 import Error from "../Pages/Error/Error";
+import PremiumArticles from "../Pages/PremiumArticles/PremiumArticles";
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -73,6 +74,10 @@ export const router = createBrowserRouter([
                 path: '/updateMyArticles/:id',
                 element: <PrivateRoute><UpdateMyArticles></UpdateMyArticles></PrivateRoute>,
                 loader: ({ params }) => fetch(`http://localhost:5000/All-Articles/${params.id}`)
+            },
+            {
+                path: '/premiumArticles',
+                element: <PrivateRoute><PremiumArticles></PremiumArticles></PrivateRoute>
             }
         ]
     },

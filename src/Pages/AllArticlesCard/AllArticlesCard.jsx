@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-const AllArticlesCard = ({ articles }) => {
+const AllArticlesCard = ({ article }) => {
 
 
-    const { _id, image, title, tags, publisher, description } = articles;
+    const { _id, image, title, tags, publisher, description } = article;
 
     const truncateDescription = (desc, wordLimit) => {
         const words = desc.split(' ');
@@ -14,7 +14,7 @@ const AllArticlesCard = ({ articles }) => {
     return (
         <div>
 
-            <div class="flex flex-col justify-center items-center max-w-sm mx-auto my-8">
+            <div class="flex flex-col justify-center items-center max-w-sm mx-auto my-8 transform transition duration-500 hover:scale-105 hover:shadow-2xl">
                 <div style={{ backgroundImage: `url(${image})` }}
                     class="bg-gray-300 h-64 w-full rounded-lg shadow-md bg-cover bg-center"></div>
                 <div class="w-56 md:w-64 bg-white -mt-10 shadow-lg rounded-lg overflow-hidden">
