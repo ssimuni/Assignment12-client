@@ -5,6 +5,8 @@ import Banner from '../Banner/Banner';
 import AllPublisher from '../AllPublisherInHome/AllPublisher';
 import Statistics from '../Statistics/Statistics';
 import Pricing from '../Pricing/Pricing';
+import Faq from '../FAQ/Faq'
+import Blogs from '../BlogsHome/Blogs';
 
 const Home = () => {
     const [showModal, setShowModal] = useState(false);
@@ -40,6 +42,8 @@ const Home = () => {
             <Banner />
             <AllPublisher />
             <Statistics />
+            <Blogs></Blogs>
+            <Faq></Faq>
             <Pricing />
         </div>
     );

@@ -20,6 +20,7 @@ import AllArticlesAdmin from "../Pages/Dashboard/AllArticlesAdmin";
 import AddPublisher from "../Pages/Dashboard/AddPublisher";
 import Error from "../Pages/Error/Error";
 import PremiumArticles from "../Pages/PremiumArticles/PremiumArticles";
+import DashboardBase from "../Pages/Dashboard/DashboardBase";
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -87,6 +88,10 @@ export const router = createBrowserRouter([
         element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         errorElement: <Error></Error>,
         children: [
+            {
+                path: 'dashboardBase',
+                element: <DashboardBase></DashboardBase>
+            },
             {
                 path: 'allUser',
                 element: <AllUsers></AllUsers>

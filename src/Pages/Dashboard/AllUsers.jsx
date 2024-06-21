@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SectionTitle from '../../Components/SectionTitle';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
@@ -11,7 +11,17 @@ const AllUsers = () => {
       fetch('http://localhost:5000/users').then((res) => res.json())
   });
 
-  const makeAdmin = user => {
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage] = useState(3); // 3 users per page
+
+  const indexOfLastUser = currentPage * perPage;
+  const indexOfFirstUser = indexOfLastUser - perPage;
+  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const makeAdmin = (user) => {
     axios.patch(`http://localhost:5000/users/admin/${user._id}`)
       .then(res => {
         if (res.data.modifiedCount > 0) {
@@ -68,12 +78,12 @@ const AllUsers = () => {
                     </tr>
                   </thead>
                   <tbody className="text-sm divide-y divide-gray-300">
-                    {users.map(user => (
+                    {currentUsers.map(user => (
                       <tr key={user._id}>
                         <td className="p-2 whitespace-nowrap">
                           <div className="flex items-center">
                             <div className="w-10 h-10 mr-2 sm:mr-3">
-                              <img className="rounded-full w-10 h-10" src={user.photo} width="40" height="40" alt={user.name} />
+                              <img className="rounded-full w-10 h-10" src={user.image} width="40" height="40" alt={user.name} />
                             </div>
                           </div>
                         </td>
@@ -106,6 +116,24 @@ const AllUsers = () => {
           </div>
         </div>
       </section>
+
+      {/* Pagination */}
+      <div className="flex justify-center mt-4">
+        <nav className="inline-flex">
+          {[...Array(Math.ceil(users.length / perPage)).keys()].map(number => (
+            <button
+              key={number + 1}
+              onClick={() => paginate(number + 1)}
+              className={`uppercase mx-1 text-xs font-bold ${currentPage === number + 1
+                ? 'bg-[#E3963E] text-gray-100'
+                : 'bg-gray-300 text-gray-700'
+                } p-3 rounded-lg text-center place-items-center justify-center flex`}
+            >
+              {number + 1}
+            </button>
+          ))}
+        </nav>
+      </div>
     </div>
   );
 }

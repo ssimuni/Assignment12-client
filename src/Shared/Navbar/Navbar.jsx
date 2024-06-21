@@ -94,7 +94,7 @@ const Navbar = () => {
                     {/* {isAdmin && (
                         <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="dashboard">Dashboard</Link></li>
                     )} */}
-                    <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="dashboard">Dashboard</Link></li>
+                    <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="dashboard/dashboardBase">Dashboard</Link></li>
                     <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="myProfile">My Profile</Link></li>
                     <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="myArticles">My Articles</Link></li>
 
