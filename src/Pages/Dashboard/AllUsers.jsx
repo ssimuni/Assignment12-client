@@ -8,7 +8,7 @@ const AllUsers = () => {
   const { data: users = [], refetch } = useQuery({
     queryKey: ['users'],
     queryFn: () =>
-      fetch('http://localhost:5000/users').then((res) => res.json())
+      fetch('https://assignment12-server-iota.vercel.app/users').then((res) => res.json())
   });
 
   // Pagination state
@@ -22,7 +22,7 @@ const AllUsers = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const makeAdmin = (user) => {
-    axios.patch(`http://localhost:5000/users/admin/${user._id}`)
+    axios.patch(`https://assignment12-server-iota.vercel.app/users/admin/${user._id}`)
       .then(res => {
         if (res.data.modifiedCount > 0) {
           refetch();

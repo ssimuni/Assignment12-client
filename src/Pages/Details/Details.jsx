@@ -20,7 +20,7 @@ const Details = () => {
 
             if (user?.email !== article.email) {
                 try {
-                    const response = await fetch(`http://localhost:5000/All-Articles/${_id}`, {
+                    const response = await fetch(`https://assignment12-server-iota.vercel.app/All-Articles/${_id}`, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json',

@@ -69,27 +69,6 @@ const CheckoutForm = ({ price }) => {
         }
     };
 
-    const updatePremiumTaken = () => {
-        const expirationTime = getExpirationTime(price);
-        const premiumTaken = new Date(Date.now() + expirationTime);
-
-
-        const currentUser = users.find(u => u.email === user.email);
-
-        if (!currentUser) {
-            console.error("User not found!");
-            return;
-        }
-
-        axiosSecure.patch(`/users/${currentUser._id}/premium`, { premiumTaken: premiumTaken.toISOString() })
-            .then(res => {
-                console.log('Premium status updated:', res.data);
-                refetch();
-            })
-            .catch(err => console.error(err));
-
-    };
-
     const getExpirationTime = (price) => {
         switch (price) {
             case 1:
@@ -102,6 +81,33 @@ const CheckoutForm = ({ price }) => {
                 return 0;
         }
     };
+
+    const updatePremiumTaken = () => {
+        const expirationTime = getExpirationTime(price);
+        const premiumTaken = new Date(Date.now() + expirationTime);
+
+        const currentUser = users.find(u => u.email === user.email);
+
+        const premiumTakenISO = premiumTaken.toISOString();
+
+        axiosSecure.patch(`/users/${currentUser._id}/premium`, { premiumTaken: premiumTakenISO })
+            .then(res => {
+                console.log('Premium status updated:', res.data);
+                refetch();
+
+                setTimeout(() => {
+                    axiosSecure.patch(`/users/${currentUser._id}/premium`, { premiumTaken: null })
+                        .then(res => {
+                            console.log('Premium status reset after expiration');
+                            refetch();
+                        })
+                        .catch(err => console.error(err));
+                }, expirationTime);
+            })
+            .catch(err => console.error(err));
+    };
+
+
 
     return (
         <form className="mx-auto mb-5 w-full max-w-md bg-white p-8 rounded-lg shadow-md border border-[#E3963E]" onSubmit={handleSubmit}>

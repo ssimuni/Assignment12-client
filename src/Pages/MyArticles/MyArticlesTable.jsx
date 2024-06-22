@@ -20,7 +20,7 @@ const MyArticlesTable = ({ article, index }) => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/All-Articles/${_id}`, {
+                fetch(`https://assignment12-server-iota.vercel.app/All-Articles/${_id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())

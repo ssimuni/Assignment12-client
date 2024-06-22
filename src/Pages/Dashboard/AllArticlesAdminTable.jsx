@@ -22,7 +22,7 @@ const AllArticlesAdminTable = ({ article }) => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/All-Articles/${_id}`, {
+                fetch(`https://assignment12-server-iota.vercel.app/All-Articles/${_id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())
@@ -41,7 +41,7 @@ const AllArticlesAdminTable = ({ article }) => {
     };
 
     const handleApprove = _id => {
-        fetch(`http://localhost:5000/All-Articles/approve/${_id}`, {
+        fetch(`https://assignment12-server-iota.vercel.app/All-Articles/approve/${_id}`, {
             method: 'PATCH'
         })
             .then(res => res.json())
@@ -59,7 +59,7 @@ const AllArticlesAdminTable = ({ article }) => {
     };
 
     const handlePremium = _id => {
-        fetch(`http://localhost:5000/All-Articles/isPremium/${_id}`, {
+        fetch(`https://assignment12-server-iota.vercel.app/All-Articles/isPremium/${_id}`, {
             method: 'PATCH'
         })
             .then(res => res.json())
@@ -86,7 +86,7 @@ const AllArticlesAdminTable = ({ article }) => {
             confirmButtonText: 'Submit',
             showLoaderOnConfirm: true,
             preConfirm: (reason) => {
-                return fetch(`http://localhost:5000/All-Articles/decline/${_id}`, {
+                return fetch(`https://assignment12-server-iota.vercel.app/All-Articles/decline/${_id}`, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json'

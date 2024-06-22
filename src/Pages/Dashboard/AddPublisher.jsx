@@ -60,7 +60,7 @@ const AddPublisher = () => {
 
     const addPublisher = { image: imageUrl, name };
 
-    fetch('http://localhost:5000/publishers', {
+    fetch('https://assignment12-server-iota.vercel.app/publishers', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'

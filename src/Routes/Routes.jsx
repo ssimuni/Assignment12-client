@@ -31,7 +31,7 @@ export const router = createBrowserRouter([
             {
                 path: '/',
                 element: <Home></Home>,
-                loader: () => fetch('http://localhost:5000/All-Articles')
+                loader: () => fetch('https://assignment12-server-iota.vercel.app/All-Articles')
             },
             {
                 path: '/addArticles',
@@ -48,12 +48,12 @@ export const router = createBrowserRouter([
             {
                 path: '/allArticles',
                 element: <AllArticles></AllArticles>,
-                loader: () => fetch('http://localhost:5000/All-Articles')
+                loader: () => fetch('https://assignment12-server-iota.vercel.app/All-Articles')
             },
             {
                 path: '/details/:_id',
                 element: <PrivateRoute><Details></Details></PrivateRoute>,
-                loader: () => fetch('http://localhost:5000/All-Articles')
+                loader: () => fetch('https://assignment12-server-iota.vercel.app/All-Articles')
             },
             {
                 path: '/subscription',
@@ -70,12 +70,12 @@ export const router = createBrowserRouter([
             {
                 path: '/myArticles',
                 element: <PrivateRoute><MyArticles></MyArticles></PrivateRoute>,
-                loader: () => fetch('http://localhost:5000/All-Articles')
+                loader: () => fetch('https://assignment12-server-iota.vercel.app/All-Articles')
             },
             {
                 path: '/updateMyArticles/:id',
                 element: <PrivateRoute><UpdateMyArticles></UpdateMyArticles></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/All-Articles/${params.id}`)
+                loader: ({ params }) => fetch(`https://assignment12-server-iota.vercel.app/All-Articles/${params.id}`)
             },
             {
                 path: '/premiumArticles',

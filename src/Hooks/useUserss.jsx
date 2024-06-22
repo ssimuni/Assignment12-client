@@ -4,7 +4,7 @@ const useUserss = () => {
     const { refetch, data: users = [] } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const response = await fetch('http://localhost:5000/users');
+            const response = await fetch('https://assignment12-server-iota.vercel.app/users');
             const data = await response.json();
             return data;
         },

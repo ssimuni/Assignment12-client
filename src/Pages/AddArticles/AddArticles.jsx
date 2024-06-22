@@ -94,7 +94,7 @@ const AddArticles = () => {
         console.log(addArticle);
 
         // Submit article data to your server
-        fetch('http://localhost:5000/All-Articles', {
+        fetch('https://assignment12-server-iota.vercel.app/All-Articles', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

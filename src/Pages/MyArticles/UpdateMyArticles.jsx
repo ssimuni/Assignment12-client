@@ -70,7 +70,7 @@ const UpdateMyArticles = () => {
 
 
 
-        fetch(`http://localhost:5000/All-Articles1/${_id}`, {
+        fetch(`https://assignment12-server-iota.vercel.app/All-Articles1/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

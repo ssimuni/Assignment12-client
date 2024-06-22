@@ -4,7 +4,7 @@ const usePublisher = () => {
     const { refetch, data: publishers = [] } = useQuery({
         queryKey: ['publishers'],
         queryFn: () =>
-            fetch('http://localhost:5000/publishers').then((res) =>
+            fetch('https://assignment12-server-iota.vercel.app/publishers').then((res) =>
                 res.json(),
             )
     })

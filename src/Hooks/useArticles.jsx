@@ -5,7 +5,7 @@ const useArticles = () => {
     const { refetch, data: article = [] } = useQuery({
         queryKey: ['article'],
         queryFn: () =>
-            fetch('http://localhost:5000/All-Articles').then((res) =>
+            fetch('https://assignment12-server-iota.vercel.app/All-Articles').then((res) =>
                 res.json(),
             )
     })
