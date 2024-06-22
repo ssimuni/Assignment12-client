@@ -32,14 +32,14 @@ const Statistics = () => {
 
             <div className="h-full">
                 <div className="container mx-auto lg:px-20">
-                    <div className='grid grid-cols-3 h-full pb-40'>
+                    <div className='lg:grid lg:grid-cols-3 h-full pb-40'>
                         <div className="mx-3 lg:pl-20">
                             <div
                                 style={{
                                     backgroundImage: 'url(stat1.jpg)',
                                     position: 'relative',
                                 }}
-                                className="bg-cover bg-center bg-fixed bg-no-repeat dark:bg-gray-800 py-10 pb-3 mt-72 relative bg-purple-100 group hover:bg-purple-200 cursor-pointer transition ease-out duration-300"
+                                className="bg-cover bg-center bg-fixed bg-no-repeat dark:bg-gray-800 py-10 pb-3 lg:mt-72 relative bg-purple-100 group hover:bg-purple-200 cursor-pointer transition ease-out duration-300"
                             >
                                 <div
                                     style={{
@@ -68,7 +68,7 @@ const Statistics = () => {
                                     backgroundImage: 'url(stat1.jpg)',
                                     position: 'relative',
                                 }}
-                                className="mt-32 bg-cover bg-center bg-fixed bg-no-repeat dark:bg-gray-800 py-10 pb-3 relative bg-purple-100 group hover:bg-purple-200 cursor-pointer transition ease-out duration-300"
+                                className="lg:mt-32 mt-10 bg-cover bg-center bg-fixed bg-no-repeat dark:bg-gray-800 py-10 pb-3 relative bg-purple-100 group hover:bg-purple-200 cursor-pointer transition ease-out duration-300"
                             >
                                 <div
                                     style={{
@@ -111,7 +111,7 @@ const Statistics = () => {
                                     className="overlay group-hover:bg-opacity-70 transition ease-out duration-300"
                                 ></div>
 
-                                <div className="px-7 mt-20 text-white relative">
+                                <div className="lg:px-7 mt-20 text-white relative">
                                     <h1 className="text-center flex justify-center place-content-center mx-auto text-5xl font-bold group-hover:text-[#E3963E] transition ease-out duration-300">
                                         <CountUp end={premiumUsersCount} duration={3} />
                                     </h1>

@@ -14,7 +14,7 @@ const Blogs = () => {
             <SectionTitle heading={"Our Features"}></SectionTitle>
             <div class="container mx-auto">
                 <div class="flex flex-wrap items-center">
-                    <div class="w-10/12 md:w-6/12 lg:w-4/12 px-12 md:px-4 mr-auto ml-auto -mt-78">
+                    <div class="md:w-6/12 lg:w-4/12 lg:px-12 md:px-4 mr-auto ml-auto -mt-78">
                         <div class="relative flex flex-col min-w-0 break-words bg-[#E3963E] w-full mb-6 shadow-lg rounded-lg ">
                             <img alt="..." src="/feature.jpg" class="w-full h-96 align-middle rounded-t-lg" />
                             <blockquote class="relative p-8 mb-4">

@@ -86,7 +86,7 @@ const IncomeChart = () => {
             <SectionTitle heading={"Dashboard"}></SectionTitle>
 
 
-            <div className="flex items-center justify-center px-5 py-5">
+            <div className="lg:flex items-center justify-center px-5 py-5">
                 <h3 className='text-3xl font-bold text-[#E3963E] pr-5'>Publishers Pie Chart</h3>
                 <div className="border text-[#E3963E] rounded shadow-xl py-5 px-5 w-full lg:w-1/2">
                     <Chart
@@ -107,7 +107,7 @@ const IncomeChart = () => {
 
 
 
-            <div className="flex items-center justify-center px-5 py-5">
+            <div className="lg:flex items-center justify-center px-5 py-5">
                 <h3 className='text-3xl font-bold text-[#E3963E] pr-5'>Income and expenses</h3>
                 <div className="border text-[#E3963E] rounded shadow-xl py-5 px-5 w-full lg:w-1/2">
                     <div className="flex flex-wrap items-end">
@@ -179,8 +179,8 @@ const IncomeChart = () => {
 
 
 
-            <div className="flex items-center justify-center px-5 py-5">
-            <h3 className='text-3xl font-bold text-[#E3963E] pr-5'>Growth of Read&Digest</h3>
+            <div className="lg:flex items-center justify-center px-5 py-5">
+                <h3 className='text-3xl font-bold text-[#E3963E] pr-5'>Growth of Read&Digest</h3>
                 <div className="border text-[#E3963E] rounded shadow-xl py-5 px-5 w-full lg:w-1/2">
                     <Chart
                         chartType="Calendar"
@@ -212,7 +212,7 @@ const IncomeChart = () => {
                             [new Date(2023, 9, 24), 38436],
                             [new Date(2023, 9, 30), 38447],
                         ]}
-                        
+
                     />
                 </div>
             </div>

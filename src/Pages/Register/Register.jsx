@@ -41,6 +41,16 @@ const Register = () => {
             return;
         }
 
+        if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+            setRegisterError('Password must contain at least one special character.');
+            return;
+        }
+
+        if (!/[0-9]/.test(password)) {
+            setRegisterError('Password must contain at least one numeric character.');
+            return;
+        }
+
         setIsLoading(true);
         let imageUrl = '';
 

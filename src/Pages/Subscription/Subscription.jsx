@@ -82,10 +82,10 @@ const Subscription = () => {
             <div className="lg:flex p-2">
               <img
                 src="https://readymadeui.com/team-image.webp"
-                className="h-64 w-64 rounded-full object-cover border-4 border-[#E3963E]"
+                className="hidden lg:block h-64 w-64 rounded-full object-cover border-4 border-[#E3963E]"
                 alt="img"
               />
-              <img className="h-[135px] m-auto" src="logo.png" alt="" />
+              <img className="h-[135px] hidden lg:block m-auto" src="logo.png" alt="" />
             </div>
           </div>
         </div>

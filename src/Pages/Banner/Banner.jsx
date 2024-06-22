@@ -19,11 +19,11 @@ const Banner = () => {
 
     return (
         <div>
-            <div class="max-w-screen-xl flex items-center justify-center mt-10">
+            <div class="max-w-screen-xl lg:flex items-center justify-center mt-10">
 
-                <div class="relative z-20 flex items-center overflow-hidden bg-white dark:bg-gray-800">
-                    <div class="container relative flex px-6 py-16 mx-auto">
-                        <div class="relative z-20 flex flex-col">
+                <div class=" z-20 flex items-center overflow-hidden  dark:bg-gray-800">
+                    <div class="container  flex px-6 py-16 mx-auto">
+                        <div class=" z-20 flex flex-col">
 
                             <h1 class="left flex flex-col text-6xl font-black leading-none text-gray-800 uppercase font-bebas-neue sm:text-8xl dark:text-white">
                                 Trending
