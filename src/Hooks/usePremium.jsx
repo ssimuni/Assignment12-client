@@ -3,19 +3,19 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../Providers/AuthProvider';
 import useAxiosPublic from './useAxiosPublic';
 
-const useAdmin = () => {
+const usePremium = () => {
     const { user } = useContext(AuthContext);
     const axiosSecure = useAxiosPublic();
-    const { data: isAdmin } = useQuery({
-        queryKey: [user?.email, 'isAdmin'],
+    const { data: isPremium } = useQuery({
+        queryKey: [user?.email, 'isPremium'],
         enabled: !!user?.email,
         queryFn: async () => {
-            const res = await axiosSecure.get(`/users/adminn/${user.email}`);
-            return res.data?.admin;
+            const res = await axiosSecure.get(`/users/premium/${user.email}`);
+            return res.data?.premium;
         },
     });
 
-    return [isAdmin];
+    return [isPremium];
 }
 
-export default useAdmin;
+export default usePremium;

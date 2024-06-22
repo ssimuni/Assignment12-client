@@ -70,6 +70,7 @@ const Register = () => {
                 email,
                 image: imageUrl,
                 role: 'User',
+                premiumTaken: null
             };
             const res = await axiosPublic.post('/users', userInfo);
             if (res.data.insertedId) {
@@ -99,6 +100,8 @@ const Register = () => {
                 const userInfo = {
                     email: result.user.email,
                     name: result.user.displayName,
+                    role: 'User',
+                    premiumTaken: null
                 };
                 axiosPublic.post('/users', userInfo).then((res) => {
                     if (res.data.insertedId) {

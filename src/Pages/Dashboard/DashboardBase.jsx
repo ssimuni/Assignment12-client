@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Chart } from 'react-google-charts';
 import 'tailwindcss/tailwind.css';
 import SectionTitle from '../../Components/SectionTitle';
+import useArticles from '../../Hooks/useArticles';
 
 const IncomeChart = () => {
     const [data, setData] = useState(null);
     const [dateRange, setDateRange] = useState('today');
     const [selectedOption, setSelectedOption] = useState(0);
     const [showDropdown, setShowDropdown] = useState(false);
+    const [articleData] = useArticles();
 
     const options = [
         { label: 'Today', value: 'today' },
@@ -50,12 +52,63 @@ const IncomeChart = () => {
         return chartData;
     };
 
+    const getPublisherData = () => {
+        if (!articleData || articleData.length === 0) return [];
+
+        const publisherCount = {};
+        articleData.forEach(article => {
+            const publisher = article.publisher;
+            if (publisherCount[publisher]) {
+                publisherCount[publisher]++;
+            } else {
+                publisherCount[publisher] = 1;
+            }
+        });
+
+        const totalArticles = articleData.length;
+        const chartData = [['Publisher', 'Percentage']];
+        Object.keys(publisherCount).forEach(publisher => {
+            chartData.push([publisher, (publisherCount[publisher] / totalArticles) * 100]);
+        });
+
+        return chartData;
+    };
+
+    const titleTextStyle = {
+        color: '#E3963E',
+        fontSize: 20,
+        bold: true,
+    };
+
+
     return (
         <div>
             <SectionTitle heading={"Dashboard"}></SectionTitle>
 
 
             <div className="flex items-center justify-center px-5 py-5">
+                <h3 className='text-3xl font-bold text-[#E3963E] pr-5'>Publishers Pie Chart</h3>
+                <div className="border text-[#E3963E] rounded shadow-xl py-5 px-5 w-full lg:w-1/2">
+                    <Chart
+                        width={'100%'}
+                        height={'400px'}
+                        chartType="PieChart"
+                        loader={<div>Loading Chart</div>}
+                        data={getPublisherData()}
+                        options={{
+                            title: 'Article Distribution by Publisher',
+                            pieHole: 0.4,
+                            titleTextStyle: titleTextStyle
+                        }}
+                    />
+                </div>
+            </div>
+
+
+
+
+            <div className="flex items-center justify-center px-5 py-5">
+                <h3 className='text-3xl font-bold text-[#E3963E] pr-5'>Income and expenses</h3>
                 <div className="border text-[#E3963E] rounded shadow-xl py-5 px-5 w-full lg:w-1/2">
                     <div className="flex flex-wrap items-end">
                         <div className="flex-1">
@@ -117,17 +170,22 @@ const IncomeChart = () => {
                                     0: { color: '#667EEA' },
                                     1: { color: '#ED64A6' },
                                 },
+
                             }}
                         />
                     </div>
                 </div>
             </div>
+
+
+
             <div className="flex items-center justify-center px-5 py-5">
+            <h3 className='text-3xl font-bold text-[#E3963E] pr-5'>Growth of Read&Digest</h3>
                 <div className="border text-[#E3963E] rounded shadow-xl py-5 px-5 w-full lg:w-1/2">
                     <Chart
                         chartType="Calendar"
                         width="100%"
-                        height="400px"
+                        height="350px"
                         data={[
                             [
                                 {
@@ -139,27 +197,26 @@ const IncomeChart = () => {
                                     id: 'Won/Loss',
                                 },
                             ],
-                            [new Date(2012, 3, 13), 37032],
-                            [new Date(2012, 3, 14), 38024],
-                            [new Date(2012, 3, 15), 38024],
-                            [new Date(2012, 3, 16), 38108],
-                            [new Date(2012, 3, 17), 38229],
+                            [new Date(2022, 3, 13), 37032],
+                            [new Date(2022, 3, 14), 38024],
+                            [new Date(2022, 3, 15), 38024],
+                            [new Date(2022, 3, 16), 38108],
+                            [new Date(2022, 3, 17), 38229],
                             // More rows...
-                            [new Date(2013, 9, 4), 38177],
-                            [new Date(2013, 9, 5), 38705],
-                            [new Date(2013, 9, 12), 38210],
-                            [new Date(2013, 9, 13), 38029],
-                            [new Date(2013, 9, 19), 38823],
-                            [new Date(2013, 9, 23), 38345],
-                            [new Date(2013, 9, 24), 38436],
-                            [new Date(2013, 9, 30), 38447],
+                            [new Date(2023, 9, 4), 38177],
+                            [new Date(2023, 9, 5), 38705],
+                            [new Date(2023, 9, 12), 38210],
+                            [new Date(2023, 9, 13), 38029],
+                            [new Date(2023, 9, 19), 38823],
+                            [new Date(2023, 9, 23), 38345],
+                            [new Date(2023, 9, 24), 38436],
+                            [new Date(2023, 9, 30), 38447],
                         ]}
-                        options={{
-                            title: 'Red Sox Attendance',
-                        }}
+                        
                     />
                 </div>
             </div>
+
         </div>
     );
 };

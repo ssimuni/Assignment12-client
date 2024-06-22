@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { AuthContext } from '../../Providers/AuthProvider'
 import useArticles from '../../Hooks/useArticles';
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
+import usePublisher from '../../Hooks/usePublisher';
 
 const image = import.meta.env.VITE_imgHost;
 const imageApi = `https://api.imgbb.com/1/upload?key=${image}`;
@@ -16,6 +17,7 @@ const AddArticles = () => {
     const [selectedTags, setSelectedTags] = useState([]);
     const [selectedPublisher, setSelectedPublisher] = useState(null);
     const [, refetch] = useArticles();
+    const [publishers,] = usePublisher();
     const axiosPublic = useAxiosPublic();
     const [selectedImage, setSelectedImage] = useState(null);
 
@@ -164,6 +166,7 @@ const AddArticles = () => {
         }),
     };
 
+
     const options = [
         { value: 'Breaking News', label: 'Breaking News' },
         { value: 'Top Stories', label: 'Top Stories' },
@@ -248,6 +251,11 @@ const AddArticles = () => {
         { value: 'Television', label: 'Television' },
         { value: 'Photography', label: 'Photography' },
     ];
+
+    const publisherOptions = publishers.map(publisher => ({
+        value: publisher.name,
+        label: publisher.name
+    }));
 
     return (
         <div>
@@ -336,7 +344,7 @@ const AddArticles = () => {
                                     </h4>
                                     <Select
                                         id="publisher" name="publisher"
-                                        options={options}
+                                        options={publisherOptions}
                                         styles={customStyles}
                                         className="w-full"
                                         placeholder="Select publisher"

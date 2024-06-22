@@ -4,12 +4,15 @@ import Select from 'react-select';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../Providers/AuthProvider'
 import { Navigate, useLoaderData } from 'react-router-dom';
+import usePublisher from '../../Hooks/usePublisher';
+
 
 const image = import.meta.env.VITE_imgHost;
 const imageApi = `https://api.imgbb.com/1/upload?key=${image}`;
 
 const UpdateMyArticles = () => {
 
+    const [publishers,] = usePublisher();
     const articles = useLoaderData();
     const { _id, title, image, tags, publisher, description } = articles;
 
@@ -215,6 +218,11 @@ const UpdateMyArticles = () => {
         { value: 'Photography', label: 'Photography' },
     ];
 
+    const publisherOptions = publishers.map(publisher => ({
+        value: publisher.name,
+        label: publisher.name
+    }));
+
     return (
         <div>
 
@@ -296,7 +304,7 @@ const UpdateMyArticles = () => {
                                     </h4>
                                     <Select
                                         id="publisher" name="publisher"
-                                        options={options}
+                                        options={publisherOptions}
                                         styles={customStyles}
                                         className="w-full"
                                         placeholder="Select publisher"

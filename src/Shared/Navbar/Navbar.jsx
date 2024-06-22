@@ -1,17 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
-import { AuthContext } from '../../Providers/AuthProvider'
-import useUsers from '../../Hooks/useUsers'
-import useAdmin from '../../Hooks/useAdmin'
-
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import { AuthContext } from '../../Providers/AuthProvider';
+import useUsers from '../../Hooks/useUsers';
+import useAdmin from '../../Hooks/useAdmin';
+import usePremium from '../../Hooks/usePremium';
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
     const [loadingUser, setLoadingUser] = useState(true);
     const [isHovered, setIsHovered] = useState(false);
-    // const [isAdmin] = useAdmin();
-
-
+    const [isAdmin] = useAdmin();
+    const [isPremium] = usePremium()
+    const [users,] = useUsers();
     useEffect(() => {
         setLoadingUser(true);
         const timeout = setTimeout(() => {
@@ -24,8 +24,8 @@ const Navbar = () => {
     const handleLogOut = () => {
         logOut()
             .then()
-            .catch()
-    }
+            .catch();
+    };
 
     const renderLoggedInNavbar = () => {
         return (
@@ -39,7 +39,9 @@ const Navbar = () => {
                                 <div className="dropdown dropdown-end block flex">
                                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                         <div className="w-10 rounded-full">
-                                            <img alt="Tailwind CSS Navbar component" src={user.photoURL || 'https://via.placeholder.com/150'}
+                                            <img
+                                                alt="User Avatar"
+                                                src={user.photoURL || 'https://via.placeholder.com/150'}
                                                 onMouseEnter={() => setIsHovered(true)}
                                             />
                                         </div>
@@ -51,14 +53,12 @@ const Navbar = () => {
                                         Log out
                                     </button>
                                 </div>
-
                             )}
                             {isHovered && (
                                 <div
-                                    className="absolute top-10 right-0 bg-white border-2 shadow-lg rounded-lg text-black px-1 py-0.5 opacity-0 group-hover:opacity-100 transition-opacity "
+                                    className="absolute top-10 right-0 bg-white border-2 shadow-lg rounded-lg text-black px-1 py-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
                                 >
                                     {loadingUser ? 'Loading....' : user.displayName}
-
                                 </div>
                             )}
                         </Link>
@@ -78,7 +78,6 @@ const Navbar = () => {
                     <button className="btn ml-5 bg-[#E3963E] text-gray-100 hover:bg-orange-500">Register</button>
                 </Link>
             </div>
-
         );
     };
 
@@ -89,22 +88,24 @@ const Navbar = () => {
             {user && (
                 <>
                     <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="addArticles">Add Articles</Link></li>
-                    <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="premiumArticles">Premium Articles</Link></li>
+
                     <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="subscription">Subscription</Link></li>
-                    {/* {isAdmin && (
-                        <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="dashboard">Dashboard</Link></li>
-                    )} */}
-                    <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="dashboard/dashboardBase">Dashboard</Link></li>
+                    {isAdmin && (
+                        <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="dashboard/dashboardBase">Dashboard</Link></li>
+                    )}
+
+                    {isPremium && (
+                        <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="premiumArticles">Premium Articles</Link></li>
+                    )}
                     <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="myProfile">My Profile</Link></li>
                     <li className='text-[#E3963E] pr-3 font-semibold text-base'><Link to="myArticles">My Articles</Link></li>
-
                 </>
             )}
         </>
     );
 
     return (
-        <div className="navbar bg-base-100 ">
+        <div className="navbar bg-base-100">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -114,21 +115,18 @@ const Navbar = () => {
                         {navlinks}
                     </ul>
                 </div>
-
-
-                <img className='w-24' src="/logo.png" alt="" />
+                <img className='w-24' src="/logo.png" alt="Logo" />
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
                     {navlinks}
                 </ul>
             </div>
-
             <div className="navbar-end">
                 {user ? renderLoggedInNavbar() : renderLoggedOutNavbar()}
             </div>
-        </div >
-    )
-}
+        </div>
+    );
+};
 
-export default Navbar
+export default Navbar;

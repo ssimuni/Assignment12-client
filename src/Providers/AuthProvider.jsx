@@ -51,16 +51,11 @@ const AuthProvider = ({ children }) => {
         return signOut(auth);
     }
 
-    const signInWithGoogle = async () => {
+    const signInWithGoogle = () => {
         setLoading(true);
-        try {
-            const provider = new GoogleAuthProvider();
-            const userCredential = await signInWithPopup(auth, provider);
-            setUser(userCredential.user);
-            return userCredential.user;
-        } catch (error) {
-            throw error;
-        }
+
+        const provider = new GoogleAuthProvider();
+        return signInWithPopup(auth, provider);
     };
 
     const signInWithGithub = async () => {
@@ -78,20 +73,24 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, currentUser => {
             console.log('user in the auth state changed', currentUser);
-            setUser(currentUser);
+
             if (currentUser) {
                 const userInfo = { email: currentUser.email };
                 axiosPublic.post('/jwt', userInfo)
                     .then(res => {
                         if (res.data.token) {
                             localStorage.setItem('access-token', res.data.token);
+                            setUser(currentUser);
+                            setLoading(false);
                         }
                     })
             }
             else {
                 localStorage.removeItem('access-token');
+                setUser(null);
+                setLoading(false);
             }
-            setLoading(false);
+
         });
         return () => {
             unSubscribe();
