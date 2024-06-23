@@ -24,6 +24,56 @@ const CheckoutForm = ({ price }) => {
             .catch(err => console.error(err));
     }, [axiosSecure, price]);
 
+    const getExpirationTime = (price) => {
+
+        switch (price) {
+            case 1:
+                console.log('Returning expiration time for 1 minute.');
+                return 1 * 60 * 1000;
+            case 5:
+                console.log('Returning expiration time for 5 days.');
+                return 5 * 24 * 60 * 60 * 1000;
+            case 10:
+                console.log('Returning expiration time for 10 days.');
+                return 10 * 24 * 60 * 60 * 1000;
+            default:
+                console.log('Returning default expiration time of 0.');
+                return 0;
+        }
+    };
+
+
+    const updatePremiumTaken = () => {
+        price = Number(price);
+        const expirationTime = getExpirationTime(price);
+        console.log(expirationTime);
+        const premiumTaken = new Date(Date.now() + expirationTime);
+
+        const currentUser = users.find(u => u.email === user.email);
+
+        const premiumTakenISO = premiumTaken.toISOString();
+
+
+        axiosSecure.patch(`/users/${currentUser._id}/premium`, { premiumTaken: premiumTakenISO })
+            .then(res => {
+                console.log('Premium status updated:', res.data);
+                refetch();
+
+                setTimeout(() => {
+                    console.log("dfdnv");
+                    axiosSecure.patch(`/users/${currentUser._id}/premium`, { premiumTaken: null })
+                        .then(res => {
+
+                            refetch();
+                            console.log('Premium status reset after expiration', premiumTaken);
+                        })
+                        .catch(err => console.error(err));
+                }, expirationTime);
+            })
+            .catch(err => console.error(err));
+    };
+
+
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -68,45 +118,6 @@ const CheckoutForm = ({ price }) => {
             }
         }
     };
-
-    const getExpirationTime = (price) => {
-        switch (price) {
-            case 1:
-                return 1 * 60 * 1000;
-            case 5:
-                return 5 * 24 * 60 * 60 * 1000;
-            case 10:
-                return 10 * 24 * 60 * 60 * 1000;
-            default:
-                return 0;
-        }
-    };
-
-    const updatePremiumTaken = () => {
-        const expirationTime = getExpirationTime(price);
-        const premiumTaken = new Date(Date.now() + expirationTime);
-
-        const currentUser = users.find(u => u.email === user.email);
-
-        const premiumTakenISO = premiumTaken.toISOString();
-
-        axiosSecure.patch(`/users/${currentUser._id}/premium`, { premiumTaken: premiumTakenISO })
-            .then(res => {
-                console.log('Premium status updated:', res.data);
-                refetch();
-
-                setTimeout(() => {
-                    axiosSecure.patch(`/users/${currentUser._id}/premium`, { premiumTaken: null })
-                        .then(res => {
-                            console.log('Premium status reset after expiration');
-                            refetch();
-                        })
-                        .catch(err => console.error(err));
-                }, expirationTime);
-            })
-            .catch(err => console.error(err));
-    };
-
 
 
     return (
