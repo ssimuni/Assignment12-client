@@ -13,7 +13,7 @@ const Blogs = () => {
         <div>
             <SectionTitle heading={"Our Features"}></SectionTitle>
             <div class="container mx-auto">
-                <div class="flex flex-wrap items-center">
+                <div class="lg:flex flex-wrap items-center">
                     <div class="md:w-6/12 lg:w-4/12 lg:px-12 md:px-4 mr-auto ml-auto -mt-78">
                         <div class="relative flex flex-col min-w-0 break-words bg-[#E3963E] w-full mb-6 shadow-lg rounded-lg ">
                             <img alt="..." src="/feature.jpg" class="w-full h-96 align-middle rounded-t-lg" />
@@ -29,9 +29,9 @@ const Blogs = () => {
                         </div>
                     </div>
 
-                    <div class="w-full md:w-6/12 px-4 ">
-                        <div class="flex flex-wrap">
-                            <div class="w-full md:w-6/12 px-4">
+                    <div class="lg:w-6/12 px-4">
+                        <div class="lg:flex flex-wrap">
+                            <div class="lg:w-6/12 px-4">
                                 <div class="relative flex flex-col mt-4">
                                     <div class="px-4 py-5 flex-auto">
                                         <div class="text-blueGray-500 p-3 text-[#E3963E] text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white">
@@ -57,7 +57,7 @@ const Blogs = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div class="w-full md:w-6/12 px-4">
+                            <div class="lg:w-6/12 px-4">
                                 <div class="relative flex flex-col min-w-0 mt-4">
                                     <div class="px-4 py-5 flex-auto">
                                         <div class="text-blueGray-500 text-[#E3963E] p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white">

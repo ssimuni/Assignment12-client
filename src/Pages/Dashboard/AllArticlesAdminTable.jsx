@@ -30,7 +30,7 @@ const AllArticlesAdminTable = ({ article }) => {
                         if (data.deletedCount > 0) {
                             Swal.fire({
                                 title: "Deleted!",
-                                text: "Your Article has been deleted. Reload This page.",
+                                text: "Article has been deleted.",
                                 icon: "success"
                             });
                             refetch();

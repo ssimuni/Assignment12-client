@@ -11,6 +11,7 @@ const Statistics = () => {
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: () => axiosSecure.get('/users').then((res) => res.data),
+        refetchInterval: 6000,
     });
 
     const [allUsersCount, setAllUsersCount] = useState(0);

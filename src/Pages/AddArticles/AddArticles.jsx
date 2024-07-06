@@ -6,6 +6,7 @@ import { AuthContext } from '../../Providers/AuthProvider'
 import useArticles from '../../Hooks/useArticles';
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import usePublisher from '../../Hooks/usePublisher';
+import usePremium from '../../Hooks/usePremium';
 
 const image = import.meta.env.VITE_imgHost;
 const imageApi = `https://api.imgbb.com/1/upload?key=${image}`;
@@ -16,10 +17,13 @@ const AddArticles = () => {
     const navigate = useNavigate();
     const [selectedTags, setSelectedTags] = useState([]);
     const [selectedPublisher, setSelectedPublisher] = useState(null);
-    const [, refetch] = useArticles();
+    const [articles, refetch] = useArticles();
     const [publishers,] = usePublisher();
     const axiosPublic = useAxiosPublic();
     const [selectedImage, setSelectedImage] = useState(null);
+
+    const [isPremiumm,] = usePremium();
+
 
     const uploadImage = async (imageFile) => {
         const formData = new FormData();
@@ -46,6 +50,19 @@ const AddArticles = () => {
 
     const handleAddArticle = async (event) => {
         event.preventDefault();
+
+        if (!isPremiumm) {
+            const userArticles = articles.filter(article => article.email === user.email);
+            if (userArticles.length > 0) {
+                Swal.fire({
+                    title: 'Sorry!',
+                    text: 'Subscribe to add more!',
+                    icon: 'info',
+                    confirmButtonText: 'Ok'
+                });
+                return;
+            }
+        }
 
         const form = event.target;
         const imageFile = selectedImage;
@@ -93,7 +110,6 @@ const AddArticles = () => {
 
         console.log(addArticle);
 
-        // Submit article data to your server
         fetch('https://assignment12-server-iota.vercel.app/All-Articles', {
             method: 'POST',
             headers: {

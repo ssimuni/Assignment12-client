@@ -7,6 +7,8 @@ import Statistics from '../Statistics/Statistics';
 import Pricing from '../Pricing/Pricing';
 import Faq from '../FAQ/Faq'
 import Blogs from '../BlogsHome/Blogs';
+import NewStat from '../Statistics/NewStat';
+import NewBanner from '../Banner/NewBanner';
 
 const Home = () => {
     const [showModal, setShowModal] = useState(false);
@@ -39,9 +41,11 @@ const Home = () => {
 
     return (
         <div>
+            {/* <NewBanner></NewBanner> */}
             <Banner />
+            {/* <Statistics /> */}
+            <NewStat></NewStat>
             <AllPublisher />
-            <Statistics />
             <Blogs></Blogs>
             <Faq></Faq>
             <Pricing />

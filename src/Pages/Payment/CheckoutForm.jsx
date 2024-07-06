@@ -10,7 +10,7 @@ const CheckoutForm = ({ price }) => {
     const [transactionId, setTransactionId] = useState('');
     const [clientSecret, setClientSecret] = useState('');
     const { user } = useContext(AuthContext);
-    const [users, refetch] = useUsers(); // users is an array of users
+    const [users, refetch] = useUsers(); 
 
     const stripe = useStripe();
     const elements = useElements();

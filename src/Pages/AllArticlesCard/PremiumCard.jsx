@@ -4,7 +4,7 @@ import usePremium from '../../Hooks/usePremium';
 
 const PremiumCard = ({ article }) => {
     const { _id, image, title, tags, publisher, description } = article;
-    const [isPremium] = usePremium();
+    const [isPremium, refetch] = usePremium();
 
     const truncateDescription = (desc, wordLimit) => {
         const words = desc.split(' ');

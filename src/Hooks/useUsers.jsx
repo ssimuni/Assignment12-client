@@ -6,7 +6,8 @@ const useUsers = () => {
         queryFn: () =>
             fetch('https://assignment12-server-iota.vercel.app/users').then((res) =>
                 res.json(),
-            )
+            ),
+        refetchInterval: 6000,
     })
     return [users, refetch]
 }

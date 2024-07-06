@@ -2,9 +2,11 @@ import React, { useContext } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProvider';
 import MyArticlesTable from './MyArticlesTable';
+import useArticles from '../../Hooks/useArticles';
 
 const MyArticles = () => {
-    const articles = useLoaderData();
+    // const articles = useLoaderData();
+    const [articles,] = useArticles();
     const { user } = useContext(AuthContext);
 
     const myArticles = articles.filter(article => {

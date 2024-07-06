@@ -6,16 +6,17 @@ import useAxiosPublic from './useAxiosPublic';
 const usePremium = () => {
     const { user } = useContext(AuthContext);
     const axiosSecure = useAxiosPublic();
-    const { data: isPremium } = useQuery({
+    const { data: isPremium, refetch } = useQuery({
         queryKey: [user?.email, 'isPremium'],
         enabled: !!user?.email,
         queryFn: async () => {
             const res = await axiosSecure.get(`/users/premium/${user.email}`);
             return res.data?.premium;
         },
+        refetchInterval: 6000,
     });
 
-    return [isPremium];
+    return [isPremium, refetch];
 }
 
 export default usePremium;

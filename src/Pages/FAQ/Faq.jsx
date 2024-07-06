@@ -7,7 +7,7 @@ const Accordion = () => {
             <div className="container mx-auto">
                 <div className="-mx-4 flex flex-wrap">
                     <div className="w-full px-4">
-                        <div className="mx-auto mb-[60px] max-w-[520px] text-center lg:mb-20">
+                        <div className="mx-auto mt-10 mb-[60px] max-w-[520px] text-center lg:mb-20">
                             <SectionTitle heading={"Any Questions? Look Here"}></SectionTitle>
                         </div>
                     </div>

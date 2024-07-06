@@ -47,6 +47,7 @@ const AddPublisher = () => {
     const imageFile = selectedImage;
     const imageUrl = await uploadImage(imageFile);
     const name = form.name.value;
+    const email = form.email.value;
 
     if (!imageUrl) {
       Swal.fire({
@@ -58,7 +59,7 @@ const AddPublisher = () => {
       return;
     }
 
-    const addPublisher = { image: imageUrl, name };
+    const addPublisher = { image: imageUrl, name, email };
 
     fetch('https://assignment12-server-iota.vercel.app/publishers', {
       method: 'POST',
@@ -106,13 +107,18 @@ const AddPublisher = () => {
                 <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
 
                   <div className="relative">
-                    <input id="name" name="name" type="text" className="peer placeholder-transparent h-10 w-full border-b-2 pl-5 rounded-lg border-[#E3963E]  focus:outline-none focus:borer-rose-600" placeholder="Publisher Name" />
-                    <label for="password" className="absolute left-0 -top-3.5 text-[#E3963E] text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5  peer-focus:text-sm">Publisher Name</label>
+                    <input id="name" name="name" type="text" className="peer placeholder-transparent h-10 w-full border-b-2 pl-5 rounded-lg border-[#E3963E]  focus:outline-none focus:borer-rose-600" placeholder="Publisher's Name" />
+                    <label for="password" className="absolute left-0 -top-3.5 text-[#E3963E] text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5  peer-focus:text-sm">Publisher's Name</label>
                   </div>
 
 
+                  <div className="relative">
+                    <input id="email" name="email" type="email" className="peer placeholder-transparent h-10 w-full border-b-2 pl-5 rounded-lg border-[#E3963E]  focus:outline-none focus:borer-rose-600" placeholder="Publisher's Email" />
+                    <label for="password" className="absolute left-0 -top-3.5 text-[#E3963E] text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5  peer-focus:text-sm">Publisher's Email</label>
+                  </div>
+
                   <div class="mt-5">
-                    <label for="photobutton" class=" text-[#E3963E] text-sm">Your Photo</label>
+                    <label for="photobutton" class=" text-[#E3963E] text-sm">Photo</label>
 
                     <div>
                       <input onChange={(e) => setSelectedImage(e.target.files[0])} id="image" name="image" type="file" class="block w-full cursor-pointer appearance-none rounded-l-md border-b-2 rounded-lg border-[#E3963E]  bg-white px-3 py-2 text-sm transition focus:z-10 focus:border-[#E3963E] focus:outline-none focus:ring-1 focus:ring-[#E3963E] disabled:cursor-not-allowed disabled:bg-gray-200 disabled:opacity-75" />
