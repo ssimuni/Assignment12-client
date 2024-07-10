@@ -52,6 +52,14 @@ body {
     animation: slideInRight 2.5s forwards;
 }
 
+.nav {
+    background-image: url('/statb.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+
 
 @keyframes slideInLeft {
     from {

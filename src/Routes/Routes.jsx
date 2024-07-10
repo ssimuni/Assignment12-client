@@ -22,6 +22,7 @@ import Error from "../Pages/Error/Error";
 import PremiumArticles from "../Pages/PremiumArticles/PremiumArticles";
 import DashboardBase from "../Pages/Dashboard/DashboardBase";
 import Payment from "../Pages/Payment/Payment";
+import Publisher from "../Pages/Publisher/Publisher";
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -84,6 +85,10 @@ export const router = createBrowserRouter([
             {
                 path: '/payment',
                 element: <PrivateRoute><Payment></Payment></PrivateRoute>
+            },
+            {
+                path: '/publisher',
+                element: <PrivateRoute><Publisher></Publisher></PrivateRoute>
             }
         ]
     },

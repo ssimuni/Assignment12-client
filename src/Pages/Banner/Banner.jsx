@@ -19,12 +19,12 @@ const Banner = () => {
 
     return (
         <div>
-            <div class="lg:flex h-full items-center justify-center mt-10 bg-cover bg-fixed w-full bg-black px-5 @lg:px-12 lg:px-20 py-10"
+            <div class="lg:flex h-full items-center justify-center bg-cover bg-fixed w-full bg-black px-5 @lg:px-12 lg:px-20 py-10"
                 style={{
                     backgroundImage: 'url(statb.jpg)',
                 }}>
 
-                <div class="flex items-center overflow-hidden  dark:bg-gray-800">
+                <div class="flex items-center overflow-hidden  dark:bg-transparent">
                     <div class="container  flex px-6 py-16 mx-auto">
                         <div class="flex flex-col">
 
@@ -45,7 +45,7 @@ const Banner = () => {
                                         <path d="M2 12H22">
                                         </path>
                                     </svg></Link>
-                               
+
                             </div>
 
                             <ul className="mt-10 flex items-center justify-start gap-5 lg:gap-12 h-28 z-10">
@@ -59,7 +59,7 @@ const Banner = () => {
                                     </p>
                                     <p className='text-white'>Users</p>
                                 </li>
-                                <li className="flex bg-[#E3963E]  hover:shadow-2xl hover:p-7 bg-opacity-70 flex-col items-center font-bold p-5 shadow-lg rounded-lg">
+                                <li className="flex bg-[#E3963E]  hover:shadow-2xl hover:p-7 bg-opacity-70 flex-col items-center font-bold p-5 shadow-lg rounded-lg hidden lg:block md:block">
                                     <p className="text-3xl lg:text-5xl text-white">3K<span className="text-white">+</span>
                                     </p>
                                     <p className='text-white'>Reviews</p>

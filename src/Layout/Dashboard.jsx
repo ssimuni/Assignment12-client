@@ -20,50 +20,50 @@ const Dashboard = () => {
 
     return (
         <div className='flex flex-col md:flex-row'>
-            <aside className="flex flex-col w-full md:w-64 min-h-screen px-4 py-8 overflow-y-auto bg-[#E3963E] border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
+            <aside className="flex flex-col w-full md:w-64 min-h-screen px-4 py-8 overflow-y-auto bg-[#E3963E] border-r rtl:border-r-0 rtl:border-l">
                 <div className="flex flex-col items-center mt-6 -mx-2">
                     <img className="object-cover w-24 h-24 mx-2 rounded-full" src={user.photoURL} alt="avatar" />
-                    <h4 className="mx-2 mt-2 font-bold text-white dark:text-gray-200">{user.displayName}</h4>
-                    <p className="mx-2 mt-1 text-sm font-medium text-white dark:text-gray-400">{user.email}</p>
+                    <h4 className="mx-2 mt-2 font-bold text-white dark:text-white">{user.displayName}</h4>
+                    <p className="mx-2 mt-1 text-sm font-medium text-white dark:text-wite">{user.email}</p>
                 </div>
 
                 <div className="flex flex-col justify-between flex-1 mt-6">
                     <nav>
                         <NavLink to="/dashboard/allUser">
-                            <div className="flex items-center px-4 py-2 mt-3 text-white transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
+                            <div className="flex items-center px-4 py-2 mt-3 text-white transition-colors duration-300 transform rounded-lg hover:bg-gray-100  dark:hover:text-gray-200 hover:text-gray-700">
                                 <FaUser className="w-5 h-5" />
                                 <span className="mx-4 font-medium">All Users</span>
-                                <span className="text-right mx-6 font-medium bg-white px-2 rounded-lg text-[#E3963E] dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">{users.length}</span>
+                                <span className="text-right mx-6 font-medium bg-white px-2 rounded-lg text-[#E3963E] dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">{users.length}</span>
                             </div>
                         </NavLink>
 
                         <NavLink to="/dashboard/allArticlesAdmin">
-                            <div className="flex items-center px-4 py-2 mt-3 text-white transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
+                            <div className="flex items-center px-4 py-2 mt-3 text-white transition-colors duration-300 transform rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
                                 <PiArticleNyTimesFill className="w-5 h-5" />
                                 <span className="mx-4 font-medium">All Articles</span>
-                                <span className="mx-4 font-medium bg-white text-right px-2 rounded-lg text-[#E3963E] dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">{article.length}</span>
+                                <span className="mx-4 font-medium bg-white text-right px-2 rounded-lg text-[#E3963E] dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">{article.length}</span>
                             </div>
                         </NavLink>
 
                         <NavLink to="/dashboard/addPublisher">
-                            <div className="flex items-center px-4 py-2 mt-3 text-white transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
+                            <div className="flex items-center px-4 py-2 mt-3 text-white transition-colors duration-300 transform rounded-lg dark:text-wite hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
                                 <BsNewspaper className="w-5 h-5" />
                                 <span className="mx-4 font-medium">Add Publishers</span>
-                                <span className="mx-4 font-medium bg-white text-right px-2 rounded-lg text-[#E3963E] dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">{publishers.length}</span>
+                                <span className="mx-4 font-medium bg-white text-right px-2 rounded-lg text-[#E3963E] dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">{publishers.length}</span>
                             </div>
                         </NavLink>
 
                         <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
 
                         <NavLink to="/">
-                            <div className="flex items-center px-4 py-2 mt-5 text-white transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
+                            <div className="flex items-center px-4 py-2 mt-5 text-white transition-colors duration-300 transform rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
                                 <HiHome className="w-5 h-5" />
                                 <span className="mx-4 font-medium">Home</span>
                             </div>
                         </NavLink>
 
                         <NavLink to="/myProfile">
-                            <div className="flex items-center px-4 py-2 mt-3 text-white transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
+                            <div className="flex items-center px-4 py-2 mt-3 text-white transition-colors duration-300 transform rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
                                 <CgProfile className="w-5 h-5" />
                                 <span className="mx-4 font-medium">My Profile</span>
                             </div>

@@ -40,7 +40,7 @@ const Statistics = () => {
                                     backgroundImage: 'url(stat1.jpg)',
                                     position: 'relative',
                                 }}
-                                className="bg-cover bg-center bg-fixed bg-no-repeat dark:bg-gray-800 py-10 pb-3 lg:mt-72 relative bg-purple-100 group hover:bg-purple-200 cursor-pointer transition ease-out duration-300"
+                                className="bg-cover bg-center bg-fixed bg-no-repeat  py-10 pb-3 lg:mt-72 relative bg-purple-100 group hover:bg-purple-200 cursor-pointer transition ease-out duration-300"
                             >
                                 <div
                                     style={{
@@ -69,7 +69,7 @@ const Statistics = () => {
                                     backgroundImage: 'url(stat1.jpg)',
                                     position: 'relative',
                                 }}
-                                className="lg:mt-32 mt-10 bg-cover bg-center bg-fixed bg-no-repeat dark:bg-gray-800 py-10 pb-3 relative bg-purple-100 group hover:bg-purple-200 cursor-pointer transition ease-out duration-300"
+                                className="lg:mt-32 mt-10 bg-cover bg-center bg-fixed bg-no-repeat  py-10 pb-3 relative bg-purple-100 group hover:bg-purple-200 cursor-pointer transition ease-out duration-300"
                             >
                                 <div
                                     style={{
@@ -98,7 +98,7 @@ const Statistics = () => {
                                     backgroundImage: 'url(stat1.jpg)',
                                     position: 'relative',
                                 }}
-                                className="bg-cover bg-center bg-fixed bg-no-repeat dark:bg-gray-800 py-10 pb-3 mt-5 relative bg-purple-100 group hover:bg-purple-200 cursor-pointer transition ease-out duration-300"
+                                className="bg-cover bg-center bg-fixed bg-no-repeat  py-10 pb-3 mt-5 relative bg-purple-100 group hover:bg-purple-200 cursor-pointer transition ease-out duration-300"
                             >
                                 <div
                                     style={{

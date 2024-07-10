@@ -15,13 +15,13 @@ const Pricing = () => {
         })
     }
     return (
-        <div>
+        <div className='mt-10'>
 
             <SectionTitle heading={"Subscription Plans"} subHeading={"Choose the Best Plan for You"}></SectionTitle>
             <section style={{
                 backgroundImage: 'url(p1.jpg)'
             }}
-                class=" h-full bg-cover bg-center bg-fixed bg-no-repeat dark:bg-gray-800 px-2">
+                class="mt-10 h-full bg-cover bg-center bg-fixed bg-no-repeat  px-2">
                 <div class="container px-6 py-8 mx-auto">
                     <div class="grid gap-6 mt-16 sm:gap-8 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 mx-auto">
 
@@ -40,42 +40,42 @@ const Pricing = () => {
                                 </div>
 
                                 <div class="flex items-center">
-                                     <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
+                                    <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
 
                                     <span class="mx-4 text-white">Breaking News Alerts</span>
                                 </div>
 
                                 <div class="flex items-center">
-                                     <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
+                                    <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
 
                                     <span class="mx-4 text-white">Basic Search Functionality</span>
                                 </div>
 
                                 <div class="flex items-center">
-                                     <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
+                                    <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
 
                                     <span class="mx-4 text-white">Personalized Content Recommendations</span>
                                 </div>
 
                                 <div class="flex items-center">
-                                     <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
+                                    <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
 
                                     <span class="mx-4 text-white">Image Galleries and Videos</span>
                                 </div>
 
                                 <div class="flex items-center">
-                                     <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
+                                    <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
 
                                     <span class="mx-4 text-white">Category Browsing</span>
                                 </div>
 
                                 <div class="flex items-center">
-                                     <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
+                                    <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
 
                                     <span class="mx-4 text-white">Article Sharing</span>
                                 </div>
 
-                               
+
                             </div>
 
                             <button onClick={freebtn} class="btn w-full border-none mt-10 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-[#E3963E] rounded-md hover:bg-orange-500 focus:outline-none text-[18px]">Try free for one month</button>
@@ -93,49 +93,49 @@ const Pricing = () => {
 
                             <div class="mt-8 space-y-8">
                                 <div class="flex items-center">
-                                     <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
+                                    <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
 
                                     <span class="mx-4 text-white dark:text-white">Unlimited Article Access</span>
                                 </div>
 
                                 <div class="flex items-center">
-                                     <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
+                                    <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
 
                                     <span class="mx-4 text-white dark:text-white">Ad-Free Experience</span>
                                 </div>
 
                                 <div class="flex items-center">
-                                     <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
+                                    <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
 
                                     <span class="mx-4 text-white dark:text-white">Offline Reading</span>
                                 </div>
 
                                 <div class="flex items-center">
-                                     <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
+                                    <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
 
                                     <span class="mx-4 text-white dark:text-white">Optimize hashtags</span>
                                 </div>
 
                                 <div class="flex items-center">
-                                     <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
+                                    <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
 
                                     <span class="mx-4 text-white dark:text-white">Early Access to Articles</span>
                                 </div>
 
                                 <div class="flex items-center">
-                                     <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
+                                    <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
 
                                     <span class="mx-4 text-white dark:text-white">Premium Newsletters</span>
                                 </div>
 
                                 <div class="flex items-center">
-                                     <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
+                                    <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
 
                                     <span class="mx-4 text-white dark:text-white">Interactive Features</span>
                                 </div>
 
                                 <div class="flex items-center">
-                                     <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
+                                    <AiFillRightCircle className='text-[#E3963E] w-6 h-6' />
 
                                     <span class="mx-4 text-white dark:text-white">Podcasts and Audio Articles</span>
                                 </div>

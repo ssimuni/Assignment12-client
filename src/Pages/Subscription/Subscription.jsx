@@ -45,7 +45,7 @@ const Subscription = () => {
     <div>
       <div
         style={{ backgroundImage: 'url(p1.jpg)' }}
-        className="h-full w-full bg-cover bg-center bg-fixed bg-no-repeat dark:bg-gray-800 font-[sans-serif] relative mx-auto rounded overflow-hidden mt-4"
+        className="h-full w-full bg-cover bg-center bg-fixed bg-no-repeat  font-[sans-serif] relative mx-auto rounded overflow-hidden mt-4"
       >
         <div className="grid sm:grid-cols-2 items-center py-10 border-y-8 border-orange-400">
           <div className="px-6 py-10 bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 border border-opacity-20 duration-200 transform rounded-lg lg:w-96 mx-auto">

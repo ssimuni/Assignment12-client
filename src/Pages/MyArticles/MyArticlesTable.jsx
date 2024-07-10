@@ -49,8 +49,8 @@ const MyArticlesTable = ({ article, index }) => {
 
     return (
         <tr className="text-gray-700">
-            <td className="text-center px-4 py-3">{index + 1}</td>
-            <td className="px-4 py-3 lg:w-[400px]">
+            <td className="text-center px-4 py-3 border">{index + 1}</td>
+            <td className="px-4 py-3 lg:w-[400px] border">
                 <div className="flex items-center text-sm">
                     <div className="relative w-8 h-8 mr-3 rounded-full md:block">
                         <img className="object-cover w-full h-full rounded-full" src={image} alt="" loading="lazy" />
@@ -61,8 +61,8 @@ const MyArticlesTable = ({ article, index }) => {
                     </div>
                 </div>
             </td>
-            <td className="px-4 py-3 text-ms font-semibold lg:w-28">{isPremium}</td>
-            <td className="px-4 py-4 text-ms font-semibold lg:w-28 flex items-center">
+            <td className="px-4 py-3 text-ms font-semibold lg:w-20 border text-center">{isPremium}</td>
+            <td className="px-4 py-4 text-ms font-semibold lg:w-28 border">
                 {status}
                 {status === "Declined" && (
                     <button
@@ -73,17 +73,17 @@ const MyArticlesTable = ({ article, index }) => {
                     </button>
                 )}
             </td>
-            <td className="text-xs">
+            <td className="text-xs border">
                 <Link to={`/details/${_id}`} className="mx-auto justify-center flex w-14 text-center p-2 bg-[#E3963E] text-white rounded">
                     Details
                 </Link>
             </td>
-            <td className="text-xs">
+            <td className="text-xs border">
                 <Link to={`/updateMyArticles/${_id}`} className="mx-auto justify-center flex w-14 text-center p-2 bg-[#E3963E] text-white rounded">
                     Update
                 </Link>
             </td>
-            <td className="px-4 py-3 text-xs text-center">
+            <td className="px-4 py-3 text-xs text-center border">
                 <button className="text-center p-2 bg-red-600 text-white justify-center rounded" onClick={() => handleDelete(_id)}>
                     Delete
                 </button>

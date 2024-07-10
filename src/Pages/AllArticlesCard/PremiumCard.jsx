@@ -13,7 +13,7 @@ const PremiumCard = ({ article }) => {
 
     return (
         <div className="mt-5 flex justify-center items-center">
-            <div className="max-w-xs container bg-white rounded-xl shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl">
+            <div className="max-w-xs container bg-white rounded-xl mb-8 shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl">
                 <div>
                     <div className='flex justify-between'>
                         {isPremium ? (
