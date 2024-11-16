@@ -23,6 +23,7 @@ import PremiumArticles from "../Pages/PremiumArticles/PremiumArticles";
 import DashboardBase from "../Pages/Dashboard/DashboardBase";
 import Payment from "../Pages/Payment/Payment";
 import Publisher from "../Pages/Publisher/Publisher";
+import RateWebsite from "../Pages/Rating/RateWebsite";
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -89,6 +90,10 @@ export const router = createBrowserRouter([
             {
                 path: '/publisher',
                 element: <PrivateRoute><Publisher></Publisher></PrivateRoute>
+            },
+            {
+                path: '/rating',
+                element: <RateWebsite></RateWebsite>
             }
         ]
     },

@@ -45,6 +45,36 @@ const AllUsers = () => {
       });
   }
 
+
+  const handleDelete = (user) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete this user!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`https://assignment12-server-iota.vercel.app/userss/${user._id}`, {
+          method: 'DELETE'
+        })
+          .then(res => res.json())
+          .then(data => {
+            if (data.deletedCount > 0) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "User has been deleted.",
+                icon: "success"
+              });
+              refetch();
+            }
+          });
+      }
+    });
+  };
+
   return (
     <div>
       <SectionTitle heading={"All Users"} />
@@ -107,6 +137,10 @@ const AllUsers = () => {
                               </button>
                             )}
                         </td>
+                        <td> <button className="text-center p-2 bg-red-600 text-white justify-center rounded"
+                          onClick={() => handleDelete(user)}>
+                          Delete
+                        </button></td>
                       </tr>
                     ))}
                   </tbody>

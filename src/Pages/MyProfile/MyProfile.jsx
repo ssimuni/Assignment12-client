@@ -19,14 +19,24 @@ const MyProfile = () => {
                     <h2 className="text-2xl text-center">{user.displayName}</h2>
                     <p>{user.email}</p>
                 </div>
-                <Link to="/update">
-                    <button
-                        className="bg-[#E3963E] text-white px-4 py-2 rounded-lg mx-auto flex mb-4"
-                    >
-                        Update Profile
-                    </button>
-                </Link>
 
+                <div className="flex justify-center items-center gap-4 pb-5">
+                    <Link to="/update">
+                        <button
+                            className="bg-[#E3963E] text-white px-4 py-2 rounded-lg"
+                        >
+                            Update Profile
+                        </button>
+                    </Link>
+
+                    <Link to="/rating">
+                        <button
+                            className="bg-[#E3963E] text-white px-4 py-2 rounded-lg"
+                        >
+                            Rate Us
+                        </button>
+                    </Link>
+                </div>
             </div>
         </div >
     );
