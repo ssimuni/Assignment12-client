@@ -36,7 +36,6 @@ const NewStat = () => {
                     backgroundImage: 'url(statb.jpg)',
                 }}
             >
-                {/* <SectionTitle heading={"Our Users"} subHeading={"Insights into Our User Base"} /> */}
 
                 <h3 className='lg:text-8xl text-6xl text-center font-bold text-white py-5'>---Our Users---</h3>
                 <p className='text-xl text-center italic font-semibold text-white'>Insights into Our User Base</p>
