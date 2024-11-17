@@ -110,7 +110,7 @@ const AddArticles = () => {
 
         console.log(addArticle);
 
-        fetch('https://assignment12-server-iota.vercel.app/All-Articles', {
+        fetch(import.meta.env.VITE_API_URL + '/All-Articles', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

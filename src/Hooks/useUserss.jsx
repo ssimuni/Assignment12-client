@@ -4,7 +4,7 @@ const useUserss = () => {
     const { refetch, data: users = [] } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const response = await fetch('https://assignment12-server-iota.vercel.app/users');
+            const response = await fetch(import.meta.env.VITE_API_URL + '/users');
             const data = await response.json();
             return data;
         },

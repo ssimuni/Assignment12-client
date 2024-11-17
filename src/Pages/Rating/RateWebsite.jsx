@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
+import useAuth from '../../Hooks/useAuth';
 
 const RateWebsite = () => {
+    const { user } = useAuth();
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -23,13 +25,16 @@ const RateWebsite = () => {
         }
 
         const ratingData = {
+            email: user.email,
             rating,
             comment,
             date: new Date().toISOString(),
         };
 
+        console.log(ratingData)
         try {
             const res = await axiosPublic.post('/rating', ratingData);
+
             if (res.data.insertedId) {
                 Swal.fire({
                     icon: 'success',
@@ -43,7 +48,7 @@ const RateWebsite = () => {
             Swal.fire({
                 icon: 'error',
                 title: 'Submission Failed',
-                text: error.message,
+                text: error.response?.data?.message || error.message,
             });
         } finally {
             setIsSubmitting(false);

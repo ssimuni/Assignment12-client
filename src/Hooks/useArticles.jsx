@@ -5,7 +5,7 @@ const useArticles = () => {
     const { refetch, data: article = [] } = useQuery({
         queryKey: ['article'],
         queryFn: () =>
-            fetch('https://assignment12-server-iota.vercel.app/All-Articles').then((res) =>
+            fetch(import.meta.env.VITE_API_URL+'/All-Articles').then((res) =>
                 res.json(),
             ),
         refetchInterval: 6000,

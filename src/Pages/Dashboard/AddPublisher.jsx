@@ -61,7 +61,7 @@ const AddPublisher = () => {
 
     const addPublisher = { image: imageUrl, name, email };
 
-    fetch('https://assignment12-server-iota.vercel.app/publishers', {
+    fetch(import.meta.env.VITE_API_URL + '/publishers', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'

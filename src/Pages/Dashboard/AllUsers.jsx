@@ -8,7 +8,7 @@ const AllUsers = () => {
   const { data: users = [], refetch } = useQuery({
     queryKey: ['users'],
     queryFn: () =>
-      fetch('https://assignment12-server-iota.vercel.app/users').then((res) => res.json())
+      fetch(import.meta.env.VITE_API_URL + '/users').then((res) => res.json())
   });
 
   // Pagination state
@@ -22,7 +22,7 @@ const AllUsers = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const makeAdmin = (user) => {
-    axios.patch(`https://assignment12-server-iota.vercel.app/users/admin/${user._id}`)
+    axios.patch(import.meta.env.VITE_API_URL + `/users/admin/${user._id}`)
       .then(res => {
         if (res.data.modifiedCount > 0) {
           refetch();
@@ -57,7 +57,7 @@ const AllUsers = () => {
       confirmButtonText: "Yes, delete this user!"
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://assignment12-server-iota.vercel.app/userss/${user._id}`, {
+        fetch(import.meta.env.VITE_API_URL + `/userss/${user._id}`, {
           method: 'DELETE'
         })
           .then(res => res.json())

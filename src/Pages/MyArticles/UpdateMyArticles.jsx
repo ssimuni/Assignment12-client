@@ -70,7 +70,7 @@ const UpdateMyArticles = () => {
 
 
 
-        fetch(`https://assignment12-server-iota.vercel.app/All-Articles1/${_id}`, {
+        fetch(import.meta.env.VITE_API_URL + `/All-Articles1/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
